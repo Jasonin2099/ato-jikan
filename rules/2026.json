@@ -1,0 +1,13 @@
+{
+  "year": 2026,
+  "era": "令和8年分",
+  "note": "給与収入のみ・金額は円。住民税は自治体ごとに異なるため対象外。",
+  "kyuyoKojo": { "value": 740000, "desc": "給与所得控除の最低保障額（給与収入190万円以下）", "source": "国税庁 タックスアンサー No.1410 給与所得控除", "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm", "year": 2026 },
+  "kiso": { "value": 1040000, "desc": "基礎控除（合計所得132万円以下の場合）", "source": "国税庁 タックスアンサー No.1199 基礎控除", "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1199.htm", "year": 2026 },
+  "fuyoShotoku": { "value": 620000, "desc": "扶養親族の合計所得金額要件", "source": "国税庁 令和8年度税制改正（基礎控除等の見直し）", "url": "https://www.nta.go.jp/users/gensen/2026kiso/", "year": 2026 },
+  "fuyoKojo": { "young": 630000, "other": 380000, "desc": "親の扶養控除額：特定扶養（19〜22歳）63万円／一般38万円", "source": "国税庁 タックスアンサー No.1180 扶養控除", "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1180.htm", "year": 2026 },
+  "tokutei": { "table": [[850000,630000],[900000,610000],[950000,510000],[1000000,410000],[1050000,310000],[1100000,210000],[1150000,110000],[1200000,60000],[1230000,30000]], "desc": "特定親族特別控除：[子の合計所得の上限, 親の控除額]", "source": "国税庁 タックスアンサー No.1177 特定親族特別控除", "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1177.htm", "year": 2026 },
+  "shaho": { "young": 1500000, "other": 1300000, "desc": "健康保険の被扶養者認定：年間収入見込み 19〜22歳は150万円未満、それ以外は130万円未満", "source": "日本年金機構 19歳以上23歳未満の被扶養者認定における年間収入要件", "url": "https://www.nenkin.go.jp/oshirase/taisetu/2025/202508/0819.html", "year": 2026 },
+  "intlWeek": { "value": 28, "desc": "留学生の資格外活動：週28時間以内", "source": "出入国在留管理庁 資格外活動許可", "url": "https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00003.html", "year": 2026 },
+  "intlVacWeek": { "value": 40, "desc": "長期休業中は1日8時間以内。本ツールは保守的に週40時間（労働基準法第32条）で計算", "source": "出入国在留管理庁 資格外活動許可 / 労働基準法 第32条", "url": "https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00003.html", "year": 2026 }
+}
