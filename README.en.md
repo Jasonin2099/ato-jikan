@@ -2,15 +2,18 @@
 
 [日本語](README.md) ・ [中文](README.zh.md)
 
-A tool for students with part-time jobs in Japan: it works out **how many more hours you can work this year without crossing the dependent-income thresholds ("年収の壁") under the 2026 rules**. It also applies the 28-hours-a-week limit for international students and makes a shareable 1080×1350 result image.
+A tool for students with part-time jobs in Japan: it works out **how many more hours you can work this year without crossing the dependent-income thresholds ("年収の壁") under the 2026 rules**. It also applies the 28-hours-a-week limit for international students and makes a shareable 1600×2000 result image.
 
 **▶ Try it:** https://jasonin2099.github.io/ato-jikan/
+
+![The app in Japanese, Chinese and English](docs/hero.png)
 
 ## Features
 - Remaining hours from your hourly wage, gross pay so far this year and remaining paydays
 - The 1.36M / 1.5M / 1.59M / 1.78M / 1.97M yen thresholds, each linked to an official source
 - A year-end projection at your current weekly hours, and how your parent's deduction changes
 - International-student mode: 28 h/week during term, 40 h/week during long vacations
+- Japanese / Chinese / English (follows your browser, remembers your choice), dark mode
 - Everything runs on your device. Nothing is sent anywhere.
 
 ## Rules and sources
