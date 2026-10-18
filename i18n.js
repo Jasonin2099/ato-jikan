@@ -97,7 +97,7 @@
       hbMoney: h => `The money line comes before the 28 h/week rule (${h} h left)`, hbTarget: (L, d) => `Target: ${L} (${d})`,
       stOver: 'Over', stProj: 'Over at this pace', stLeft: m => `${m} to go`,
       proj: (wk, p, a, b) => `At your pace (${wk} h a week) you end the year at <b>${p}</b>. Parent’s deduction: ${a} → <b>${b}</b>`,
-      cTitle: y => `${y}  ato-jikan`, cLegal: 'Within my visa rules, this year I can still work', cMoney: L => `To stay ${L}, this year I can still work`, cUnit: 'h',
+      cTitle: y => `${y}  ato-jikan`, cLegal: 'Within my visa rules, I can still work', cMoney: L => `To stay ${L}, I can still work`, cUnit: 'h',
       cW: w => `= about ${w} h a week`, cM: (m, p) => `= about ${m} h a month (${p} paydays left)`, cRoom: (r, w) => `${r} left · ${w} an hour`,
       cF1: 'Based on the 2026 rules (NTA, Japan Pension Service, Immigration Agency)', cF2: 'An estimate. Ask your employer, insurer or tax office.'
     }
