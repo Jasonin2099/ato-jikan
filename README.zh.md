@@ -53,3 +53,6 @@ python3 -m http.server   # http://localhost:8000
 
 ## 许可证
 MIT（字体为 Noto Sans CJK，SIL OFL 1.1）
+
+
+Icons: [Lucide](https://lucide.dev) (ISC License), inlined as SVG.

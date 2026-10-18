@@ -49,3 +49,6 @@ python3 -m http.server   # http://localhost:8000
 
 ## ライセンス
 MIT
+
+
+Icons: [Lucide](https://lucide.dev) (ISC License), inlined as SVG.

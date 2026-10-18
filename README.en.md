@@ -30,3 +30,6 @@ All numbers live in [`rules/2026.json`](rules/2026.json). Each entry cites its o
 
 ## License
 MIT
+
+
+Icons: [Lucide](https://lucide.dev) (ISC License), inlined as SVG.
