@@ -74,15 +74,52 @@ main{max-width:560px;margin:0 auto;padding:var(--s4) var(--s4) 56px}
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:var(--bg);font-size:14px;font-weight:600;padding:10px 18px;border-radius:99px;transition:opacity .2s,transform .25s var(--ease);z-index:9;white-space:nowrap}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .hide{display:none!important}
+/* ---- layout v2: mobile single column → tablet → desktop two columns ---- */
+.topin{display:flex;align-items:center;gap:var(--s2);width:100%;max-width:var(--maxw);margin:0 auto}
+.top{padding-left:var(--pad);padding-right:var(--pad)}
+:root{--maxw:560px;--pad:16px}
+main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad));padding:var(--s4) var(--pad) 56px}
+.intro{order:0;display:none}.res{display:contents}.hero{order:1}.in{order:2}.resx{order:3}.note{order:4}
+.intro h1{margin:0;font-size:30px;line-height:1.25;letter-spacing:-.02em;font-weight:700;text-wrap:balance;word-break:auto-phrase}
+.intro p{margin:var(--s2) 0 0;font-size:15px;color:var(--ink-2);max-width:34em}
+.row{min-height:56px}
+.row input[type=number]{width:120px;height:44px;font-size:16px}
+.seg button{min-height:36px}.top .lang button{min-height:30px}
+.sw{width:51px;height:31px}.sw:before{width:27px;height:27px}.sw:checked:before{left:22px}
+@media (hover:hover){.btn:hover{filter:brightness(1.06)}.btn.sub:hover{background:var(--field)}.seg button:not(.on):hover{color:var(--ink)}.walls .d a:hover{color:var(--accent)}}
+/* compact live summary, shown while the hero is off screen (phones / tablets) */
+.mini{position:fixed;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 52px);z-index:4;display:block;width:100%;border:0;padding:0 var(--pad);font:inherit;text-align:left;background:var(--top);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);box-shadow:0 .5px 0 var(--sep);transform:translateY(-100%);opacity:0;pointer-events:none;transition:transform .25s var(--ease),opacity .2s}
+.mini.on{transform:none;opacity:1;pointer-events:auto}
+.miniin{display:flex;align-items:baseline;gap:var(--s2);max-width:var(--maxw);margin:0 auto;height:44px;padding-top:8px}
+.mini .mk{font-size:12px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
+.mini .mn b{font-size:22px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:-.02em}.mini .mn small{font-size:12px;font-weight:600;margin-left:2px}
+.mini .ms{font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (min-width:640px){:root{--maxw:680px;--pad:24px}
+  .intro{display:block;margin:var(--s4) 0 var(--s5)}
+  .hero{padding:var(--s6)}.hero .n{font-size:96px}.stats b{font-size:22px}.stats div{padding:var(--s3) var(--s4)}}
+@media (min-width:1024px){:root{--maxw:1160px;--pad:32px}
+  main{display:grid;grid-template-columns:minmax(0,1fr) 440px;grid-template-rows:auto auto 1fr;column-gap:56px;padding-top:var(--s6)}
+  .intro{grid-column:1;grid-row:1;margin:var(--s4) 0 var(--s4)}.intro h1{font-size:34px}.intro p{font-size:16px}
+  .in{grid-column:1;grid-row:2}.note{grid-column:1;grid-row:3;align-self:start;max-width:40em}
+  .in .sec:first-child{margin-top:var(--s3)}
+  .res{display:block;grid-column:2;grid-row:1/span 3;align-self:start;position:sticky;top:76px;max-height:calc(100vh - 92px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:2px 2px var(--s4);margin:-2px}
+  .hero{padding:28px}.hero .n{font-size:104px}.stats b{font-size:21px}
+  .row{padding-left:var(--s5);padding-right:var(--s5)}.row+.row:before{left:var(--s5)}
+  .row label{font-size:16px}.row .h{font-size:13px}
+  .mini{display:none}}
+@media (min-width:1280px){main{grid-template-columns:minmax(0,1fr) 460px;column-gap:72px}.intro h1{font-size:40px}}
+@media (max-width:400px){.row input[type=number]{width:100px}}
 @media (max-width:370px){.top .sub{display:none}.top .lang{margin-left:auto}.hero .n{font-size:64px}}
-@media (min-width:900px){main{padding-top:var(--s6)}}
 @media (prefers-reduced-motion:reduce){*,*:before{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
-<div class="top"><b data-i18n="brand">あと何時間</b><span class="sub" data-i18n="sub">2026年分（令和8年）</span>
-  <div class="seg lang" id="lang" role="group" aria-label="Language"><button data-l="ja">日</button><button data-l="zh">中</button><button data-l="en">EN</button></div></div>
+<div class="top"><div class="topin"><b data-i18n="brand">あと何時間</b><span class="sub" data-i18n="sub">2026年分（令和8年）</span>
+  <div class="seg lang" id="lang" role="group" aria-label="Language"><button data-l="ja">日</button><button data-l="zh">中</button><button data-l="en">EN</button></div></div></div>
+<button class="mini" id="mini" type="button" tabindex="-1" aria-hidden="true"><span class="miniin"><span class="mk" id="mk2"></span><span class="mn"><b id="mn">–</b><small data-i18n="hUnit">時間</small></span><span class="ms" id="ms"></span></span></button>
 <main>
+  <header class="intro"><h1 data-i18n="introH"></h1><p data-i18n="introP"></p></header>
+  <aside class="res">
   <div class="hero" id="hero">
     <div class="k" id="hk" data-i18n="hkDefault">今年、扶養を外れずに働けるのは</div>
     <div class="n"><span id="hn">–</span><small data-i18n="hUnit">時間</small></div>
@@ -92,6 +129,18 @@ main{max-width:560px;margin:0 auto;padding:var(--s4) var(--s4) 56px}
     <div class="bind" id="hb"></div>
   </div>
 
+  <div class="resx">
+  <div class="sec" data-i18n="secWalls">今年の壁（給与だけの場合）</div>
+  <div class="card walls" id="walls"></div>
+
+  <button class="btn" id="mk" data-i18n="mk">結果を画像にする</button>
+  <button class="btn sub hide" id="dl" data-i18n="dl">画像を保存 / 共有</button>
+  <div class="toast" id="toast" role="status"></div>
+  <img id="cardimg" alt="結果カード" data-i18n-alt="alt">
+  </div>
+  </aside>
+
+  <section class="in" aria-label="inputs">
   <div class="sec" data-i18n="secYou">あなたについて</div>
   <div class="card">
     <div class="row"><label data-i18n="age">12月31日時点の年齢</label>
@@ -115,13 +164,7 @@ main{max-width:560px;margin:0 auto;padding:var(--s4) var(--s4) 56px}
     </div>
   </div>
 
-  <div class="sec" data-i18n="secWalls">今年の壁（給与だけの場合）</div>
-  <div class="card walls" id="walls"></div>
-
-  <button class="btn" id="mk" data-i18n="mk">結果を画像にする</button>
-  <button class="btn sub hide" id="dl" data-i18n="dl">画像を保存 / 共有</button>
-  <div class="toast" id="toast" role="status"></div>
-  <img id="cardimg" alt="結果カード" data-i18n-alt="alt">
+  </section>
 
   <p class="note">
     <span data-i18n="note"></span><span data-i18n="srcLabel">出典：</span><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1177.htm" target="_blank" rel="noopener">国税庁 No.1177 特定親族特別控除</a> /
@@ -187,6 +230,8 @@ function calc(){
     const st = s.over ? t('stOver') : s.projOver ? t('stProj') : t('stLeft')(man(Math.max(0, w.at - ytd)));
     return `<div class="row"><span class="dot ${bad?'over':'ok'}"></span><div class="wl"><div class="wt"><span class="amt">${L.label}</span><span class="st${bad?' bad':''}">${st}</span></div><span class="d">${L.d} <a href="${w.url}" target="_blank" rel="noopener">${t('src')} ↗</a></span></div></div>`;
   }).join('') + (r.proj !== null ? `<div class="row"><span class="proj">${t('proj')(wk, man(r.proj), man(AtoJikan.parentDed(R,ytd,young)), man(AtoJikan.parentDed(R,r.proj,young)))}</span></div>` : '');
+  $('mn').textContent = r.hours.toLocaleString('ja-JP'); $('mk2').textContent = t('miniK');
+  $('ms').textContent = wl > 0 ? `${r.perW.toFixed(1)} ${t('statW')}` : '';
   last = {hours: r.hours, room: r.roomUsed, perW: r.perW, perM: r.perM, target: T, bindLegal: r.bindLegal, moneyH: r.moneyH, wage, ytd, pct, wl};
   $('dl').classList.add('hide'); $('cardimg').style.display = 'none';
   save();
@@ -249,6 +294,11 @@ $('dl').onclick = async () => {
   if (navigator.canShare && navigator.canShare({files:[f]})) { try { await navigator.share({files:[f], title:t('brand')}); return; } catch(e){ if (e.name === 'AbortError') return; } }
   const a = document.createElement('a'); a.href = URL.createObjectURL(f); a.download = f.name; a.click(); toast(t('tSaved'));
 };
+// compact summary while the hero is scrolled away (hidden on desktop by CSS)
+if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => {
+  const on = !e.isIntersecting && e.boundingClientRect.top < 0; $('mini').classList.toggle('on', on); $('mini').setAttribute('aria-hidden', String(!on)); $('mini').tabIndex = on ? 0 : -1;
+}, {rootMargin: '-96px 0px 0px 0px'}).observe($('hero'));
+$('mini').onclick = () => window.scrollTo({top: 0, behavior: reduce ? 'auto' : 'smooth'});
 if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
 fetch('rules/2026.json').then(r=>r.json()).then(j=>{R=j;calc();requestAnimationFrame(()=>document.body.classList.add("ready"));}).catch(()=>{$('hs').textContent=t('loadErr');});
 </script>
