@@ -1,5 +1,7 @@
 # あと何時間（ato-jikan）
 
+[![license](https://img.shields.io/github/license/Jasonin2099/ato-jikan?style=flat&color=555)](LICENSE) [![last commit](https://img.shields.io/github/last-commit/Jasonin2099/ato-jikan?style=flat&color=555)](https://github.com/Jasonin2099/ato-jikan/commits) [![demo](https://img.shields.io/badge/demo-GitHub%20Pages-555?style=flat)](https://jasonin2099.github.io/ato-jikan/) [![stars](https://img.shields.io/github/stars/Jasonin2099/ato-jikan?style=flat&color=555)](https://github.com/Jasonin2099/ato-jikan/stargazers)
+
 [English](README.en.md) ・ [中文](README.zh.md)
 
 学生バイト向け：**扶養の壁（2026年分・令和8年）を超えずに、今年あと何時間働けるか**を逆算するツール。留学生の「週28時間」上限も同時に計算し、共有用の結果画像（1600×2000）を作れます。
