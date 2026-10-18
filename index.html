@@ -108,14 +108,34 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
   .row label{font-size:16px}.row .h{font-size:13px}
   .mini{display:none}}
 @media (min-width:1280px){main{grid-template-columns:minmax(0,1fr) 460px;column-gap:72px}.intro h1{font-size:40px}}
+/* ---- v3 polish: icons, no hairlines, more air ---- */
+.ic{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px}
+.sec{display:flex;align-items:center;gap:6px;margin:36px var(--s1) var(--s3)}.sec .ic{width:16px;height:16px;color:var(--ink-3)}
+.row+.row:before{display:none}
+.card{padding:6px 0}.row{min-height:60px;padding-top:10px;padding-bottom:10px}
+.row .ic.lead{width:20px;height:20px;color:var(--ink-2)}
+.walls{padding:var(--s2) 0}.walls .row{padding-top:14px;padding-bottom:14px}.walls .row+.row{padding-top:6px}
+.walls .d a.src{display:inline-flex;align-items:center;gap:3px;margin-left:2px;color:var(--ink-2);font-weight:600;text-decoration:none;white-space:nowrap}.walls .d a.src .ic{width:13px;height:13px;vertical-align:0}
+.walls .d a.src:hover{color:var(--accent)}
+.lic{width:16px;height:16px;color:var(--ink-3);margin-left:var(--s2)}
+.btn{display:flex;align-items:center;justify-content:center;gap:var(--s2)}.btn .ic{width:20px;height:20px}
+.btn .spin{display:none}.btn.busy .spin{display:block;animation:sp .8s linear infinite}.btn.busy .ic:not(.spin){display:none}
+@keyframes sp{to{transform:rotate(360deg)}}
+.srch{display:inline-flex;align-items:center;gap:4px;font-weight:600;color:var(--ink-2)}.srch .ic{width:14px;height:14px}
+.note a{color:var(--ink-2);text-underline-offset:2px}
+.hero.loading .n span{opacity:.35}
+.hero{padding:28px var(--s5)}
+@media (min-width:640px){.hero{padding:var(--s6)}}
+@media (max-width:370px){.lic{display:none}}
 @media (max-width:400px){.row input[type=number]{width:100px}}
 @media (max-width:370px){.top .sub{display:none}.top .lang{margin-left:auto}.hero .n{font-size:64px}}
 @media (prefers-reduced-motion:reduce){*,*:before{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><!-- Lucide icons v1.59.0, ISC License, https://lucide.dev --><symbol id="i-briefcase-business" viewBox="0 0 24 24"><path d="M12 12h.01" /><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /><path d="M22 13a18.15 18.15 0 0 1-20 0" /><rect width="20" height="14" x="2" y="6" rx="2" /></symbol><symbol id="i-cake" viewBox="0 0 24 24"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8" /><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1" /><path d="M2 21h20" /><path d="M7 8v3" /><path d="M12 8v3" /><path d="M17 8v3" /><path d="M7 4h.01" /><path d="M12 4h.01" /><path d="M17 4h.01" /></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></symbol><symbol id="i-external-link" viewBox="0 0 24 24"><path d="M15 3h6v6" /><path d="M10 14 21 3" /><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></symbol><symbol id="i-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></symbol><symbol id="i-languages" viewBox="0 0 24 24"><path d="m5 8 6 6" /><path d="m4 14 6-6 2-3" /><path d="M2 5h12" /><path d="M7 2h1" /><path d="m22 22-5-10-5 10" /><path d="M14 18h6" /></symbol><symbol id="i-loader-circle" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.219-8.56" /></symbol><symbol id="i-milestone" viewBox="0 0 24 24"><path d="M12 13v8" /><path d="M12 3v3" /><path d="M18.172 6a2 2 0 0 1 1.414.586l2.06 2.06a1.207 1.207 0 0 1 0 1.708l-2.06 2.06a2 2 0 0 1-1.414.586H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z" /></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" /></symbol><symbol id="i-share-2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /><line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></symbol><symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></symbol></svg>
 <div class="top"><div class="topin"><b data-i18n="brand">あと何時間</b><span class="sub" data-i18n="sub">2026年分（令和8年）</span>
-  <div class="seg lang" id="lang" role="group" aria-label="Language"><button data-l="ja">日</button><button data-l="zh">中</button><button data-l="en">EN</button></div></div></div>
+  <svg class="ic lic" aria-hidden="true"><use href="#i-languages"/></svg><div class="seg lang" id="lang" role="group" aria-label="Language"><button data-l="ja">日</button><button data-l="zh">中</button><button data-l="en">EN</button></div></div></div>
 <button class="mini" id="mini" type="button" tabindex="-1" aria-hidden="true"><span class="miniin"><span class="mk" id="mk2"></span><span class="mn"><b id="mn">–</b><small data-i18n="hUnit">時間</small></span><span class="ms" id="ms"></span></span></button>
 <main>
   <header class="intro"><h1 data-i18n="introH"></h1><p data-i18n="introP"></p></header>
@@ -130,25 +150,25 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
   </div>
 
   <div class="resx">
-  <div class="sec" data-i18n="secWalls">今年の壁（給与だけの場合）</div>
+  <div class="sec"><svg class="ic" aria-hidden="true"><use href="#i-milestone"/></svg><span data-i18n="secWalls">今年の壁（給与だけの場合）</span></div>
   <div class="card walls" id="walls"></div>
 
-  <button class="btn" id="mk" data-i18n="mk">結果を画像にする</button>
-  <button class="btn sub hide" id="dl" data-i18n="dl">画像を保存 / 共有</button>
+  <button class="btn" id="mk"><svg class="ic" aria-hidden="true"><use href="#i-image"/></svg><svg class="ic spin" aria-hidden="true"><use href="#i-loader-circle"/></svg><span data-i18n="mk">結果を画像にする</span></button>
+  <button class="btn sub hide" id="dl"><svg class="ic" aria-hidden="true"><use href="#i-share-2"/></svg><span data-i18n="dl">画像を保存 / 共有</span></button>
   <div class="toast" id="toast" role="status"></div>
   <img id="cardimg" alt="結果カード" data-i18n-alt="alt">
   </div>
   </aside>
 
   <section class="in" aria-label="inputs">
-  <div class="sec" data-i18n="secYou">あなたについて</div>
+  <div class="sec"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg><span data-i18n="secYou">あなたについて</span></div>
   <div class="card">
-    <div class="row"><label data-i18n="age">12月31日時点の年齢</label>
+    <div class="row"><svg class="ic lead" aria-hidden="true"><use href="#i-cake"/></svg><label data-i18n="age">12月31日時点の年齢</label>
       <div class="seg" id="age"><button data-v="1922" class="on" data-i18n="age1922">19〜22歳</button><button data-v="other" data-i18n="ageOther">それ以外</button></div></div>
-    <div class="row"><label data-i18n="intl">留学生（資格外活動）<span class="h">週28時間の上限も計算します</span></label><input type="checkbox" class="sw" id="intl"></div>
+    <div class="row"><svg class="ic lead" aria-hidden="true"><use href="#i-plane"/></svg><label data-i18n="intl">留学生（資格外活動）<span class="h">週28時間の上限も計算します</span></label><input type="checkbox" class="sw" id="intl"></div>
   </div>
 
-  <div class="sec" data-i18n="secJob">バイト</div>
+  <div class="sec"><svg class="ic" aria-hidden="true"><use href="#i-briefcase-business"/></svg><span data-i18n="secJob">バイト</span></div>
   <div class="card">
     <div class="row"><label data-i18n="wage">時給<span class="h">交通費は含めない</span></label><input type="number" id="wage" value="1200" min="1" inputmode="numeric"><span class="u" data-i18n="uYen">円</span></div>
     <div class="row"><label data-i18n="ytd">今年受け取った額<span class="h">1月〜今日。明細の「総支給額」の合計</span></label><input type="number" id="ytd" value="980000" min="0" inputmode="numeric"><span class="u" data-i18n="uYen">円</span></div>
@@ -157,7 +177,7 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
   </div>
 
   <div id="intlbox" class="hide">
-    <div class="sec" data-i18n="secIntl">留学生：残りの期間（今日〜12/31）</div>
+    <div class="sec"><svg class="ic" aria-hidden="true"><use href="#i-plane"/></svg><span data-i18n="secIntl">留学生：残りの期間（今日〜12/31）</span></div>
     <div class="card">
       <div class="row"><label data-i18n="tw">授業期間の週数<span class="h">週28時間まで</span></label><input type="number" id="tw" min="0" inputmode="numeric"><span class="u" data-i18n="uWeek">週</span></div>
       <div class="row"><label data-i18n="vw">長期休業の週数<span class="h">学則で定める休み。1日8時間まで（本ツールは週40hで計算）</span></label><input type="number" id="vw" value="0" min="0" inputmode="numeric"><span class="u" data-i18n="uWeek">週</span></div>
@@ -167,13 +187,14 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
   </section>
 
   <p class="note">
-    <span data-i18n="note"></span><span data-i18n="srcLabel">出典：</span><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1177.htm" target="_blank" rel="noopener">国税庁 No.1177 特定親族特別控除</a> /
+    <span data-i18n="note"></span><span class="srch"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg><span data-i18n="srcLabel">出典：</span></span><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1177.htm" target="_blank" rel="noopener">国税庁 No.1177 特定親族特別控除</a> /
     <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm" target="_blank" rel="noopener">No.1410 給与所得控除</a> /
     <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1199.htm" target="_blank" rel="noopener">No.1199 基礎控除</a> /
     <a href="https://www.nta.go.jp/users/gensen/2026kiso/" target="_blank" rel="noopener">令和8年度改正（扶養親族の所得要件62万円）</a> /
     <a href="https://www.nenkin.go.jp/oshirase/taisetu/2025/202508/0819.html" target="_blank" rel="noopener">日本年金機構 19〜22歳の被扶養者認定150万円未満</a> /
     <a href="https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00003.html" target="_blank" rel="noopener">出入国在留管理庁 資格外活動（週28時間）</a> /
-    労働基準法 第32条（週40時間）
+    労働基準法 第32条（週40時間）<br>
+    Icons: <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a> (ISC License)
   </p>
 </main>
 <script src="i18n.js"></script>
@@ -228,47 +249,60 @@ function calc(){
   $('walls').innerHTML = r.walls.map((w,i) => {
     const L = label(w), s = r.status[i], bad = s.over || s.projOver;
     const st = s.over ? t('stOver') : s.projOver ? t('stProj') : t('stLeft')(man(Math.max(0, w.at - ytd)));
-    return `<div class="row"><span class="dot ${bad?'over':'ok'}"></span><div class="wl"><div class="wt"><span class="amt">${L.label}</span><span class="st${bad?' bad':''}">${st}</span></div><span class="d">${L.d} <a href="${w.url}" target="_blank" rel="noopener">${t('src')} ↗</a></span></div></div>`;
+    return `<div class="row"><span class="dot ${bad?'over':'ok'}"></span><div class="wl"><div class="wt"><span class="amt">${L.label}</span><span class="st${bad?' bad':''}">${st}</span></div><span class="d">${L.d} <a class="src" href="${w.url}" target="_blank" rel="noopener">${t('src')}<svg class="ic" aria-hidden="true"><use href="#i-external-link"/></svg></a></span></div></div>`;
   }).join('') + (r.proj !== null ? `<div class="row"><span class="proj">${t('proj')(wk, man(r.proj), man(AtoJikan.parentDed(R,ytd,young)), man(AtoJikan.parentDed(R,r.proj,young)))}</span></div>` : '');
   $('mn').textContent = r.hours.toLocaleString('ja-JP'); $('mk2').textContent = t('miniK');
   $('ms').textContent = wl > 0 ? `${r.perW.toFixed(1)} ${t('statW')}` : '';
-  last = {hours: r.hours, room: r.roomUsed, perW: r.perW, perM: r.perM, target: T, bindLegal: r.bindLegal, moneyH: r.moneyH, wage, ytd, pct, wl};
+  last = {walls: r.walls.map((w,i) => ({label: label(w).label, bad: r.status[i].over || r.status[i].projOver, left: Math.max(0, w.at - ytd)})), hours: r.hours, room: r.roomUsed, perW: r.perW, perM: r.perM, target: T, bindLegal: r.bindLegal, moneyH: r.moneyH, wage, ytd, pct, wl};
   $('dl').classList.add('hide'); $('cardimg').style.display = 'none';
   save();
 }
 let toastT = 0;
 function toast(msg){ const el = $('toast'); el.textContent = msg; el.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('on'), 2200); }
-// ---- share card: 1600×2000 (4:5), stays readable when X shrinks it ----
+// ---- share card v3: 1600×2000 (4:5), same quiet look as the page; readable when X shrinks it ----
+const ICON = {milestone: ['M12 13v8','M12 3v3','M18.172 6a2 2 0 0 1 1.414.586l2.06 2.06a1.207 1.207 0 0 1 0 1.708l-2.06 2.06a2 2 0 0 1-1.414.586H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z']};
+function icon(g, name, x, y, size, color){ g.save(); g.translate(x, y); g.scale(size/24, size/24); g.strokeStyle = color; g.lineWidth = 2; g.lineCap = g.lineJoin = 'round'; ICON[name].forEach(d => g.stroke(new Path2D(d))); g.restore(); }
 async function card(){
   const W = 1600, H = 2000, c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
   const F = getComputedStyle(document.body).fontFamily;
   try { await Promise.all(['400','700'].map(w => document.fonts.load(`${w} 40px ${F}`, '0123456789時間小时'))); } catch(e){}
-  const P = 120;
+  const INK = '#1d1d1f', INK2 = '#4a4a4f', INK3 = '#66666b', ACC = '#c2410c', FIELD = '#f4f4f1';
+  const P = 136, CW = W - 2*P;
   g.fillStyle = '#f4f4f1'; g.fillRect(0,0,W,H);
-  g.fillStyle = '#fff'; roundRect(g, 64, 64, W-128, H-128, 64); g.fill();
+  g.fillStyle = '#fff'; roundRect(g, 56, 56, W-112, H-112, 72); g.fill();
   g.textBaseline = 'alphabetic';
-  g.fillStyle = '#c2410c'; roundRect(g, P+8, 166, 20, 20, 10); g.fill();
-  g.fillStyle = '#4a4a4f'; g.font = `700 44px ${F}`; g.fillText(t('cTitle')(R.year), P+48, 200);
-  g.fillStyle = '#1d1d1f'; g.font = `700 64px ${F}`; const kl = wrap(g, last.bindLegal ? t('cLegal') : t('cMoney')(last.target.label), P+8, 400, W-2*P-16, 84);
-  g.fillStyle = '#c2410c'; g.font = `700 440px ${F}`; const n = last.hours.toLocaleString('ja-JP'); g.fillText(n, P-8, 860 + (kl>1?40:0));
-  const nw = g.measureText(n).width; g.fillStyle = '#1d1d1f'; g.font = `700 112px ${F}`; g.fillText(t('cUnit'), P + nw + 16, 860 + (kl>1?40:0));
-  // three stats
-  const sw = (W - 2*P - 2*32) / 3, st = [[last.wl>0?last.perW.toFixed(1):'–', t('statW')], [last.perM.toLocaleString('ja-JP'), t('statM')], [man(last.room), t('statY')]];
-  st.forEach(([v,l],i) => { const x = P + i*(sw+32); g.fillStyle = '#f1f1ee'; roundRect(g, x, 960, sw, 220, 32); g.fill();
-    g.fillStyle = '#1d1d1f'; g.font = `700 80px ${F}`; fit(g, v, 80, sw-72); g.fillText(v, x+36, 1080);
-    g.fillStyle = '#4a4a4f'; g.font = `400 40px ${F}`; g.fillText(l, x+36, 1144); });
+  // brand row
+  g.fillStyle = ACC; roundRect(g, P, 150, 22, 22, 11); g.fill();
+  g.fillStyle = INK; g.font = `700 44px ${F}`; g.fillText(t('brand'), P+44, 180);
+  g.fillStyle = INK3; g.font = `400 40px ${F}`; const yr = String(R.year); g.fillText(yr, W - P - g.measureText(yr).width, 180);
+  // label + hero number
+  g.fillStyle = INK2; g.font = `400 56px ${F}`; const kl = wrap(g, last.bindLegal ? t('cLegal') : t('cMoney')(last.target.label), P, 340, CW, 76);
+  const ny = 760 + (kl-1)*60;
+  g.fillStyle = ACC; g.font = `700 400px ${F}`; const n = last.hours.toLocaleString('ja-JP'); fit(g, n, 400, CW-260); g.fillText(n, P-14, ny);
+  const nw = g.measureText(n).width; g.fillStyle = INK; g.font = `700 104px ${F}`; g.fillText(t('cUnit'), P + nw + 12, ny);
+  // stats (no borders, soft fill)
+  const sy = ny + 90, gap = 28, sw = (CW - 2*gap) / 3, st = [[last.wl>0?last.perW.toFixed(1):'–', t('statW')], [last.perM.toLocaleString('ja-JP'), t('statM')], [man(last.room), t('statY')]];
+  st.forEach(([v,l],i) => { const x = P + i*(sw+gap); g.fillStyle = FIELD; roundRect(g, x, sy, sw, 210, 36); g.fill();
+    g.fillStyle = INK; g.font = `700 76px ${F}`; fit(g, v, 76, sw-72); g.fillText(v, x+40, sy+112);
+    g.fillStyle = INK2; g.font = `400 38px ${F}`; g.fillText(l, x+40, sy+170); });
   // progress
-  g.fillStyle = '#ececE8'; roundRect(g, P, 1260, W-2*P, 28, 14); g.fill();
-  g.fillStyle = last.room <= 0 ? '#d70015' : '#c2410c'; roundRect(g, P, 1260, Math.max(28,(W-2*P)*last.pct/100), 28, 14); g.fill();
-  g.fillStyle = '#4a4a4f'; g.font = `400 40px ${F}`; g.fillText(t('barL')(man(last.ytd)), P, 1350);
-  const rl = last.target.label; g.fillText(rl, W - P - g.measureText(rl).width, 1350);
-  // callout
-  g.fillStyle = 'rgba(194,65,12,.09)'; roundRect(g, P, 1430, W-2*P, 220, 40); g.fill();
-  g.fillStyle = '#a3360a'; g.font = `700 52px ${F}`;
-  { const cs = last.bindLegal ? t('hbLegal')(last.moneyH) : last.target.short, n = lines(g, cs, W-2*P-112).length; wrap(g, cs, P+56, 1540 - (n-1)*36 + 18, W-2*P-112, 72); }
-  g.fillStyle = '#66666b'; g.font = `400 36px ${F}`;
-  g.fillText(t('cF1'), P, 1756); g.fillText(t('cF2'), P, 1812);
-  g.fillStyle = '#4a4a4f'; g.font = `700 36px ${F}`; g.fillText('jasonin2099.github.io/ato-jikan', P, 1868);
+  const py = sy + 290;
+  g.fillStyle = '#ececE8'; roundRect(g, P, py, CW, 24, 12); g.fill();
+  g.fillStyle = last.room <= 0 ? '#d70015' : ACC; roundRect(g, P, py, Math.max(24, CW*last.pct/100), 24, 12); g.fill();
+  g.fillStyle = INK2; g.font = `400 38px ${F}`; g.fillText(t('barL')(man(last.ytd)), P, py+80);
+  const rl = last.target.label; g.fillText(rl, W - P - g.measureText(rl).width, py+80);
+  // walls: grouped list, spacing instead of dividers
+  let wy = py + 190;
+  icon(g, 'milestone', P, wy-38, 44, INK3); g.fillStyle = INK2; g.font = `700 42px ${F}`; g.fillText(t('cWalls'), P+64, wy);
+  wy += 40; const rows = (last.walls.filter(w => !w.bad).length ? last.walls.filter(w => !w.bad) : last.walls).slice(0, 3), rh = 96;
+  g.fillStyle = FIELD; roundRect(g, P, wy, CW, rows.length*rh + 40, 40); g.fill();
+  rows.forEach((w,i) => { const y = wy + 20 + i*rh + 62;
+    g.fillStyle = w.bad ? '#d70015' : '#0b7a4b'; g.beginPath(); g.arc(P+56, y-14, 10, 0, 7); g.fill();
+    g.fillStyle = INK; g.font = `700 48px ${F}`; g.fillText(w.label, P+92, y);
+    const r = w.bad ? t('stOver') : t('stLeft')(man(w.left)); g.fillStyle = w.bad ? '#d70015' : INK2; g.font = `400 40px ${F}`; g.fillText(r, W - P - 48 - g.measureText(r).width, y); });
+  // footer
+  g.fillStyle = INK3; g.font = `400 34px ${F}`; g.fillText(t("cSrc"), P, H-200); g.fillText(t("cF2"), P, H-150);
+  g.fillStyle = INK2; g.font = `700 34px ${F}`; g.fillText('jasonin2099.github.io/ato-jikan', P, H-100);
   return c;
 }
 function fit(g,s,px,mw){ let p = px; while (p > 30 && g.measureText(s).width > mw) { p -= 4; g.font = g.font.replace(/\d+px/, p+'px'); } }
@@ -284,14 +318,15 @@ let blob = null;
 I18N.apply();
 document.querySelectorAll('#lang button').forEach(b => b.onclick = () => { I18N.set(b.dataset.l); calc(); });
 $('mk').onclick = async () => {
-  $('mk').disabled = true;
+  const b = $('mk'); b.disabled = true; b.classList.add('busy'); b.setAttribute('aria-busy','true'); b.querySelector('[data-i18n]').textContent = t('mkBusy');
+  await new Promise(r => requestAnimationFrame(() => setTimeout(r)));
   const c = await card(); $('cardimg').src = c.toDataURL('image/png'); $('cardimg').style.display = 'block';
-  c.toBlob(b => { blob = b; $('dl').classList.remove('hide'); $('mk').disabled = false; toast(t('tMade'));
+  c.toBlob(b => { blob = b; $('dl').classList.remove('hide'); b.disabled = false; b.classList.remove('busy'); b.removeAttribute('aria-busy'); b.querySelector('[data-i18n]').textContent = t('mk'); toast(t('tMade'));
     $('cardimg').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'center'}); }, 'image/png');
 };
 $('dl').onclick = async () => {
   const f = new File([blob], `atojikan-${R.year}.png`, {type:'image/png'});
-  if (navigator.canShare && navigator.canShare({files:[f]})) { try { await navigator.share({files:[f], title:t('brand')}); return; } catch(e){ if (e.name === 'AbortError') return; } }
+  if (navigator.canShare && navigator.canShare({files:[f]})) { try { await navigator.share({files:[f], title:t('brand')}); toast(t('tShared')); return; } catch(e){ if (e.name === 'AbortError') return; } }
   const a = document.createElement('a'); a.href = URL.createObjectURL(f); a.download = f.name; a.click(); toast(t('tSaved'));
 };
 // compact summary while the hero is scrolled away (hidden on desktop by CSS)
@@ -299,8 +334,14 @@ if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => {
   const on = !e.isIntersecting && e.boundingClientRect.top < 0; $('mini').classList.toggle('on', on); $('mini').setAttribute('aria-hidden', String(!on)); $('mini').tabIndex = on ? 0 : -1;
 }, {rootMargin: '-96px 0px 0px 0px'}).observe($('hero'));
 $('mini').onclick = () => window.scrollTo({top: 0, behavior: reduce ? 'auto' : 'smooth'});
-if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
-fetch('rules/2026.json').then(r=>r.json()).then(j=>{R=j;calc();requestAnimationFrame(()=>document.body.classList.add("ready"));}).catch(()=>{$('hs').textContent=t('loadErr');});
+// back / reload: restore scroll after the async rules load has laid out the page
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+const SY = 'atojikan.scroll';
+addEventListener('pagehide', () => { try { sessionStorage.setItem(SY, String(scrollY)); } catch(e){} });
+function restoreScroll(){ try { const y = +sessionStorage.getItem(SY); const nav = (performance.getEntriesByType('navigation')[0] || {}).type;
+  if (y && (nav === 'back_forward' || nav === 'reload')) scrollTo(0, y); } catch(e){} }
+$('hero').classList.add('loading'); $('hero').setAttribute('aria-busy','true'); $('hs').textContent = t('loading');
+fetch('rules/2026.json').then(r=>r.json()).then(j=>{R=j;$('hero').classList.remove('loading');$('hero').removeAttribute('aria-busy');calc();restoreScroll();requestAnimationFrame(()=>document.body.classList.add("ready"));}).catch(()=>{$('hs').textContent=t('loadErr');});
 </script>
 
 </body>
