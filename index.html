@@ -34,54 +34,53 @@ main{max-width:560px;margin:0 auto;padding:14px 16px 48px}
 .note{font-size:12px;color:var(--ink-3);margin:10px 4px;line-height:1.6}.note a{color:var(--ink-2)}
 #cardimg{width:100%;border-radius:12px;margin-top:12px;display:none;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .hide{display:none!important}
+.top .lang{margin-left:10px;flex:none}.top .lang button{flex:none;padding:3px 9px;font-size:12px}
+:lang(zh-CN) body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC","Noto Sans CJK SC","Microsoft YaHei",system-ui,sans-serif}
 </style>
 </head>
 <body>
-<div class="top"><b>あと何時間</b><span>2026年分（令和8年）のルール</span></div>
+<div class="top"><b data-i18n="brand">あと何時間</b><span class="sub" data-i18n="sub">2026年分（令和8年）</span>
+  <div class="seg lang" id="lang" role="group" aria-label="Language"><button data-l="ja">日</button><button data-l="zh">中</button><button data-l="en">EN</button></div></div>
 <main>
   <div class="hero" id="hero">
-    <div class="k" id="hk">今年、扶養を外れずに働けるのは</div>
-    <div class="n"><span id="hn">–</span><small>時間</small></div>
+    <div class="k" id="hk" data-i18n="hkDefault">今年、扶養を外れずに働けるのは</div>
+    <div class="n"><span id="hn">–</span><small data-i18n="hUnit">時間</small></div>
     <div class="s" id="hs"></div>
     <div class="bind" id="hb"></div>
   </div>
 
-  <div class="sec">あなたについて</div>
+  <div class="sec" data-i18n="secYou">あなたについて</div>
   <div class="card">
-    <div class="row"><label>12月31日時点の年齢</label>
-      <div class="seg" id="age"><button data-v="1922" class="on">19〜22歳</button><button data-v="other">それ以外</button></div></div>
-    <div class="row"><label>留学生（資格外活動）<span class="h">週28時間の上限も計算します</span></label><input type="checkbox" class="sw" id="intl"></div>
+    <div class="row"><label data-i18n="age">12月31日時点の年齢</label>
+      <div class="seg" id="age"><button data-v="1922" class="on" data-i18n="age1922">19〜22歳</button><button data-v="other" data-i18n="ageOther">それ以外</button></div></div>
+    <div class="row"><label data-i18n="intl">留学生（資格外活動）<span class="h">週28時間の上限も計算します</span></label><input type="checkbox" class="sw" id="intl"></div>
   </div>
 
-  <div class="sec">バイト</div>
+  <div class="sec" data-i18n="secJob">バイト</div>
   <div class="card">
-    <div class="row"><label>時給<span class="h">交通費は含めない</span></label><input type="number" id="wage" value="1200" min="1" inputmode="numeric"><span class="u">円</span></div>
-    <div class="row"><label>今年受け取った額<span class="h">1月〜今日。明細の「総支給額」の合計</span></label><input type="number" id="ytd" value="980000" min="0" inputmode="numeric"><span class="u">円</span></div>
-    <div class="row"><label>給料日の残り回数<span class="h">12月分が1月払いなら来年に数える</span></label><input type="number" id="pays" value="3" min="1" max="12" inputmode="numeric"><span class="u">回</span></div>
-    <div class="row"><label>いまの週の勤務時間<span class="h">任意。このペースで年末にいくらか</span></label><input type="number" id="wk" value="" min="0" placeholder="例 15" inputmode="decimal"><span class="u">h</span></div>
+    <div class="row"><label data-i18n="wage">時給<span class="h">交通費は含めない</span></label><input type="number" id="wage" value="1200" min="1" inputmode="numeric"><span class="u" data-i18n="uYen">円</span></div>
+    <div class="row"><label data-i18n="ytd">今年受け取った額<span class="h">1月〜今日。明細の「総支給額」の合計</span></label><input type="number" id="ytd" value="980000" min="0" inputmode="numeric"><span class="u" data-i18n="uYen">円</span></div>
+    <div class="row"><label data-i18n="pays">給料日の残り回数<span class="h">12月分が1月払いなら来年に数える</span></label><input type="number" id="pays" value="3" min="1" max="12" inputmode="numeric"><span class="u" data-i18n="uTimes">回</span></div>
+    <div class="row"><label data-i18n="wk">いまの週の勤務時間<span class="h">任意。このペースで年末にいくらか</span></label><input type="number" id="wk" value="" min="0" placeholder="例 15" data-i18n-ph="wkPh" inputmode="decimal"><span class="u">h</span></div>
   </div>
 
   <div id="intlbox" class="hide">
-    <div class="sec">留学生：残りの期間（今日〜12/31）</div>
+    <div class="sec" data-i18n="secIntl">留学生：残りの期間（今日〜12/31）</div>
     <div class="card">
-      <div class="row"><label>授業期間の週数<span class="h">週28時間まで</span></label><input type="number" id="tw" min="0" inputmode="numeric"><span class="u">週</span></div>
-      <div class="row"><label>長期休業の週数<span class="h">学則で定める休み。1日8時間まで（本ツールは週40hで計算）</span></label><input type="number" id="vw" value="0" min="0" inputmode="numeric"><span class="u">週</span></div>
+      <div class="row"><label data-i18n="tw">授業期間の週数<span class="h">週28時間まで</span></label><input type="number" id="tw" min="0" inputmode="numeric"><span class="u" data-i18n="uWeek">週</span></div>
+      <div class="row"><label data-i18n="vw">長期休業の週数<span class="h">学則で定める休み。1日8時間まで（本ツールは週40hで計算）</span></label><input type="number" id="vw" value="0" min="0" inputmode="numeric"><span class="u" data-i18n="uWeek">週</span></div>
     </div>
   </div>
 
-  <div class="sec">今年の壁（給与だけの場合）</div>
+  <div class="sec" data-i18n="secWalls">今年の壁（給与だけの場合）</div>
   <div class="card walls" id="walls"></div>
 
-  <button class="btn" id="mk">結果を画像にする</button>
-  <button class="btn sub hide" id="dl">画像を保存 / 共有</button>
-  <img id="cardimg" alt="結果カード">
+  <button class="btn" id="mk" data-i18n="mk">結果を画像にする</button>
+  <button class="btn sub hide" id="dl" data-i18n="dl">画像を保存 / 共有</button>
+  <img id="cardimg" alt="結果カード" data-i18n-alt="alt">
 
   <p class="note">
-    計算はすべてこの端末の中だけで行い、どこにも送信しません。税・社会保険の判断の目安で、個別の判断は勤務先・親の健康保険・税務署にご確認ください。<br>
-    ・税の壁は1〜12月に<b>支払われた</b>額で、健康保険の扶養は<b>今後1年の収入見込み</b>で判定されます（交通費も含む場合あり）。<br>
-    ・住民税の非課税ラインは自治体で異なるため計算していません。<br>
-    ・昼間部の学生は勤務先の社会保険（いわゆる106万円）の対象外です。<br>
-    出典：<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1177.htm" target="_blank" rel="noopener">国税庁 No.1177 特定親族特別控除</a> /
+    <span data-i18n="note"></span><span data-i18n="srcLabel">出典：</span><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1177.htm" target="_blank" rel="noopener">国税庁 No.1177 特定親族特別控除</a> /
     <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm" target="_blank" rel="noopener">No.1410 給与所得控除</a> /
     <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1199.htm" target="_blank" rel="noopener">No.1199 基礎控除</a> /
     <a href="https://www.nta.go.jp/users/gensen/2026kiso/" target="_blank" rel="noopener">令和8年度改正（扶養親族の所得要件62万円）</a> /
@@ -90,19 +89,21 @@ main{max-width:560px;margin:0 auto;padding:14px 16px 48px}
     労働基準法 第32条（週40時間）
   </p>
 </main>
+<script src="i18n.js"></script>
 <script src="calc.js"></script>
 <script>
 let R = null;
-const man = y => (y/10000).toLocaleString('ja-JP',{maximumFractionDigits:1}) + '万円';
-const yen = y => Math.round(y).toLocaleString('ja-JP') + '円';
+const t = k => I18N.t(k);
+const man = y => t('man')(y);
+const yen = y => t('yen')(y);
 const $ = id => document.getElementById(id);
 let young = true;
 const TXT = {
-  shaho: w => ({label: `${man(w.amount)}未満`, d: '親の健康保険の扶養（超えると自分で国保・年金）', short: '親の健康保険の扶養から外れるライン'}),
-  fuyo: () => ({label: null, d: young ? '親の特定扶養控除（63万円）の上限。超えても159万円までは特定親族特別控除で同額' : '親の扶養控除（38万円）がなくなる'}),
-  tokuteiStart: () => ({d: '親の控除が段階的に減り始める（63万→61万円…）'}),
-  tax: () => ({d: 'あなた自身に所得税がかかり始める'}),
-  tokuteiEnd: () => ({d: '親の控除がゼロになる'})
+  shaho: w => ({label: t('under')(man(w.amount)), d: t('dShaho'), short: t('shortShaho')}),
+  fuyo: () => ({label: null, d: young ? t('dFuyoYoung') : t('dFuyoOther')}),
+  tokuteiStart: () => ({d: t('dTokuteiStart')}),
+  tax: () => ({d: t('dTax')}),
+  tokuteiEnd: () => ({d: t('dTokuteiEnd')})
 };
 const label = w => Object.assign({label: man(w.amount)}, Object.fromEntries(Object.entries(TXT[w.id](w)).filter(([,v])=>v!==null)));
 let last = null;
@@ -114,15 +115,14 @@ function calc(){
   const r = AtoJikan.compute(R, {wage: $('wage').value, ytd: $('ytd').value, pays: $('pays').value, young, intl, termWeeks: $('tw').value, vacWeeks: $('vw').value, weekHours: wk, weeksLeft: wl});
   const ytd = +$('ytd').value || 0, wage = +$('wage').value || 0, T = label(r.target);
   $('hn').textContent = r.hours.toLocaleString('ja-JP');
-  $('hk').textContent = r.bindLegal ? '今年、在留資格のルール内で働けるのは' : `今年、${T.label}に収まるように働けるのは`;
-  $('hs').textContent = r.room <= 0 ? 'すでに上限に達しています' :
-    `あと ${yen(r.roomUsed)} ・ 月あたり約 ${r.perM} 時間 ・ 週あたり約 ${wl>0? r.perW.toFixed(1):'–'} 時間`;
-  $('hb').textContent = r.bindLegal ? `週28時間ルールが先に来ます（お金の壁までなら ${r.moneyH} 時間）` : (r.legalH!==null ? `週28時間ルールの残り ${r.legalH} 時間より先にお金の壁` : `目標：${T.label}（${T.d.replace(/（.*/,'')}）`);
+  $('hk').textContent = r.bindLegal ? t('hkLegal') : t('hkMoney')(T.label);
+  $('hs').textContent = r.room <= 0 ? t('hsFull') : t('hs')(yen(r.roomUsed), r.perM, wl>0? r.perW.toFixed(1):'–');
+  $('hb').textContent = r.bindLegal ? t('hbLegal')(r.moneyH) : (r.legalH!==null ? t('hbMoney')(r.legalH) : t('hbTarget')(T.label, T.d.replace(/\s*[（(].*/,'')));
   $('walls').innerHTML = r.walls.map((w,i) => {
     const L = label(w), s = r.status[i];
-    const st = s.over ? '超えています' : s.projOver ? 'このペースだと超える' : `あと ${man(Math.max(0, w.at - ytd))}`;
-    return `<div class="row"><span class="dot ${s.over||s.projOver?'over':'ok'}"></span><span class="amt">${L.label}</span><span class="d">${L.d}<br><a href="${w.url}" target="_blank" rel="noopener">出典</a></span><span class="st">${st}</span></div>`;
-  }).join('') + (r.proj !== null ? `<div class="row"><span class="d" style="font-size:13px;color:var(--ink-2)">いまのペース（週${wk}h）だと年末の合計は <b>${man(r.proj)}</b>。親の控除は ${man(AtoJikan.parentDed(R,ytd,young))} → <b>${man(AtoJikan.parentDed(R,r.proj,young))}</b></span></div>` : '');
+    const st = s.over ? t('stOver') : s.projOver ? t('stProj') : t('stLeft')(man(Math.max(0, w.at - ytd)));
+    return `<div class="row"><span class="dot ${s.over||s.projOver?'over':'ok'}"></span><span class="amt">${L.label}</span><span class="d">${L.d}<br><a href="${w.url}" target="_blank" rel="noopener">${t('src')}</a></span><span class="st">${st}</span></div>`;
+  }).join('') + (r.proj !== null ? `<div class="row"><span class="d" style="font-size:13px;color:var(--ink-2)">${t('proj')(wk, man(r.proj), man(AtoJikan.parentDed(R,ytd,young)), man(AtoJikan.parentDed(R,r.proj,young)))}</span></div>` : '');
   last = {hours: r.hours, room: r.roomUsed, perW: r.perW, perM: r.perM, target: T, bindLegal: r.bindLegal, moneyH: r.moneyH, wage};
   $('dl').classList.add('hide'); $('cardimg').style.display = 'none';
 }
@@ -153,13 +153,15 @@ document.querySelectorAll('#age button').forEach(b => b.onclick = () => { docume
 ['wage','ytd','pays','wk','tw','vw','intl'].forEach(id => $(id).addEventListener('input', calc));
 $('tw').value = Math.floor(AtoJikan.weeksLeft());
 let blob = null;
+I18N.apply();
+document.querySelectorAll('#lang button').forEach(b => b.onclick = () => { I18N.set(b.dataset.l); calc(); });
 $('mk').onclick = () => { const c = card(); $('cardimg').src = c.toDataURL('image/png'); $('cardimg').style.display = 'block'; c.toBlob(b => { blob = b; $('dl').classList.remove('hide'); }); };
 $('dl').onclick = async () => {
   const f = new File([blob], `atojikan-${R.year}.png`, {type:'image/png'});
-  if (navigator.canShare && navigator.canShare({files:[f]})) { try { await navigator.share({files:[f], title:'あと何時間'}); return; } catch(e){} }
+  if (navigator.canShare && navigator.canShare({files:[f]})) { try { await navigator.share({files:[f], title:t('brand')}); return; } catch(e){} }
   const a = document.createElement('a'); a.href = URL.createObjectURL(f); a.download = f.name; a.click();
 };
-fetch('rules/2026.json').then(r=>r.json()).then(j=>{R=j;calc();}).catch(()=>{$('hs').textContent='ルールの読み込みに失敗しました。再読み込みしてください';});
+fetch('rules/2026.json').then(r=>r.json()).then(j=>{R=j;calc();}).catch(()=>{$('hs').textContent=t('loadErr');});
 </script>
 </body>
 </html>
