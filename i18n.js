@@ -3,6 +3,7 @@
   const KEY = 'atojikan.lang', LANGS = ['ja', 'zh', 'en'];
   const S = {
     ja: {
+      statW: '時間 / 週', statM: '時間 / 月', statY: 'あと稼げる', barL: m => `受け取り済み ${m}`, tMade: '画像ができました', tSaved: '画像を保存しました', hsFull: 'もう壁に届いています。今年はおつかれさまでした',
       htmlLang: 'ja', title: 'あと何時間 — 学生バイトの年収の壁 逆算（2026年分）', brand: 'あと何時間', sub: '2026年分（令和8年）',
       hkDefault: '今年、扶養を外れずに働けるのは', hUnit: '時間',
       secYou: 'あなたについて', age: '12月31日時点の年齢', age1922: '19〜22歳', ageOther: 'それ以外',
@@ -25,7 +26,7 @@
       dFuyoOther: '親の扶養控除（38万円）がなくなる',
       dTokuteiStart: '親の控除が段階的に減り始める（63万→61万円…）', dTax: 'あなた自身に所得税がかかり始める', dTokuteiEnd: '親の控除がゼロになる',
       hkLegal: '今年、在留資格のルール内で働けるのは', hkMoney: L => `今年、${L}に収まるように働けるのは`,
-      hsFull: 'すでに上限に達しています', hs: (y, m, w) => `あと ${y} ・ 月あたり約 ${m} 時間 ・ 週あたり約 ${w} 時間`,
+      hs: (y, m, w) => `あと ${y} ・ 月あたり約 ${m} 時間 ・ 週あたり約 ${w} 時間`,
       hbLegal: h => `週28時間ルールが先に来ます（お金の壁までなら ${h} 時間）`,
       hbMoney: h => `週28時間ルールの残り ${h} 時間より先にお金の壁`, hbTarget: (L, d) => `目標：${L}（${d}）`,
       stOver: '超えています', stProj: 'このペースだと超える', stLeft: m => `あと ${m}`,
@@ -35,6 +36,7 @@
       cF1: '令和8年分のルール（国税庁・日本年金機構・出入国在留管理庁）で計算', cF2: '目安です。個別の判断は勤務先・保険者・税務署へ'
     },
     zh: {
+      statW: '小时 / 周', statM: '小时 / 月', statY: '还能挣', barL: m => `已领 ${m}`, tMade: '结果图做好了', tSaved: '图片已保存', hsFull: '已经到线了，今年辛苦啦',
       htmlLang: 'zh-CN', title: '还能打几小时 — 在日学生打工年收入之壁倒推（2026年）', brand: '还能打几小时', sub: '2026年（令和8年）规则',
       hkDefault: '今年不超出扶養范围，还能打', hUnit: '小时',
       secYou: '关于你', age: '截至12月31日的年龄', age1922: '19〜22岁', ageOther: '其他',
@@ -57,7 +59,7 @@
       dFuyoOther: '父母的扶養控除（38万日元）没有了',
       dTokuteiStart: '父母的控除开始一档档减少（63万→61万日元…）', dTax: '你自己开始要交所得税', dTokuteiEnd: '父母的控除降到零',
       hkLegal: '按在留资格的规定，今年还能打', hkMoney: L => `今年要控制在${L}，还能打`,
-      hsFull: '已经到上限了', hs: (y, m, w) => `还能挣 ${y} ・ 每月约 ${m} 小时 ・ 每周约 ${w} 小时`,
+      hs: (y, m, w) => `还能挣 ${y} ・ 每月约 ${m} 小时 ・ 每周约 ${w} 小时`,
       hbLegal: h => `每周28小时的限制先到（只看收入的话还有 ${h} 小时）`,
       hbMoney: h => `收入的线比每周28小时限制（还剩 ${h} 小时）先到`, hbTarget: (L, d) => `目标：${L}（${d}）`,
       stOver: '已超过', stProj: '照这个节奏会超', stLeft: m => `还差 ${m}`,
@@ -67,6 +69,7 @@
       cF1: '按令和8年（2026年）规则计算（国税厅・日本年金机构・出入国在留管理厅）', cF2: '仅供参考，具体请向打工单位、保险方或税务署确认'
     },
     en: {
+      statW: 'h / week', statM: 'h / month', statY: 'left to earn', barL: m => `${m} paid`, tMade: 'Image ready', tSaved: 'Image saved', hsFull: 'You have hit the line. Rest up, you earned it.',
       htmlLang: 'en', title: 'ato-jikan — how many more hours can a student work in Japan (2026)', brand: 'ato-jikan', sub: '2026 rules',
       hkDefault: 'Staying a dependent, this year you can still work', hUnit: 'hours',
       secYou: 'About you', age: 'Age on Dec 31', age1922: '19–22', ageOther: 'Other',
@@ -89,7 +92,7 @@
       dFuyoOther: 'Your parent loses the dependent deduction (¥380k)',
       dTokuteiStart: 'Your parent’s deduction starts to step down (¥630k → ¥610k …)', dTax: 'You start paying income tax yourself', dTokuteiEnd: 'Your parent’s deduction reaches zero',
       hkLegal: 'Within your visa rules, this year you can still work', hkMoney: L => `To stay ${L} this year, you can still work`,
-      hsFull: 'You have already reached the limit', hs: (y, m, w) => `${y} left · about ${m} h a month · about ${w} h a week`,
+      hs: (y, m, w) => `${y} left · about ${m} h a month · about ${w} h a week`,
       hbLegal: h => `The 28 h/week rule comes first (${h} h if you only count money)`,
       hbMoney: h => `The money line comes before the 28 h/week rule (${h} h left)`, hbTarget: (L, d) => `Target: ${L} (${d})`,
       stOver: 'Over', stProj: 'Over at this pace', stLeft: m => `${m} to go`,

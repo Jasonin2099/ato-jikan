@@ -5,37 +5,60 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>あと何時間 — 学生バイトの年収の壁 逆算（2026年分）</title>
 <style>
-:root{--ink:#1d1d1f;--ink-2:#6e6e73;--ink-3:#86868b;--sep:rgba(60,60,67,.13);--bg:#f5f5f2;--card:#fff;--accent:#c2410c;--accent-tint:rgba(194,65,12,.09);--green:#0b7a4b;--red:#d70015;--r:16px;
---f:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP","Noto Sans CJK JP",system-ui,sans-serif}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--f);-webkit-font-smoothing:antialiased}
-.top{position:sticky;top:0;z-index:5;height:calc(env(safe-area-inset-top,0px) + 48px);padding:env(safe-area-inset-top,0px) 16px 0;display:flex;align-items:center;background:rgba(250,250,248,.84);backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);box-shadow:0 .5px 0 var(--sep)}
-.top b{font-size:17px;font-weight:650}.top span{margin-left:auto;font-size:12px;color:var(--ink-3)}
-main{max-width:560px;margin:0 auto;padding:14px 16px 48px}
-.hero{background:var(--card);border-radius:var(--r);padding:20px 18px 16px;text-align:center}
-.hero .k{font-size:13px;color:var(--ink-2)}.hero .n{font-size:56px;font-weight:750;letter-spacing:-.02em;line-height:1.1;color:var(--accent);font-variant-numeric:tabular-nums}
-.hero .n small{font-size:20px;font-weight:650;margin-left:4px;color:var(--ink)}.hero .s{font-size:14px;color:var(--ink-2);margin-top:4px}
-.hero .bind{display:inline-block;margin-top:10px;font-size:12px;padding:3px 10px;border-radius:99px;background:var(--accent-tint);color:var(--accent)}
-.sec{margin:20px 4px 6px;font-size:13px;color:var(--ink-2);font-weight:600}
-.card{background:var(--card);border-radius:var(--r);overflow:hidden}
-.row{display:flex;align-items:center;gap:10px;min-height:48px;padding:8px 16px;position:relative}
-.row+.row:before{content:"";position:absolute;left:16px;right:0;top:0;height:.5px;background:var(--sep)}
-.row label{flex:1;font-size:14px;line-height:1.4}.row .h{display:block;font-size:12px;color:var(--ink-3)}
-.row input[type=number]{width:104px;text-align:right;font:inherit;font-variant-numeric:tabular-nums;border:0;background:#f2f2f0;border-radius:9px;padding:7px 10px;color:var(--ink)}
-.row input:focus{outline:2px solid var(--accent-tint)}.row .u{font-size:13px;color:var(--ink-2);width:28px}
-.seg{display:flex;background:#eeeeeb;border-radius:9px;padding:2px}.seg button{flex:1;white-space:nowrap;border:0;background:none;font:inherit;font-size:13px;padding:6px 10px;border-radius:7px;color:var(--ink-2)}
-.seg button.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
-.sw{appearance:none;width:44px;height:26px;border-radius:99px;background:#e3e3e0;position:relative;transition:.2s}.sw:checked{background:var(--accent)}
-.sw:before{content:"";position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:.2s}.sw:checked:before{left:20px}
-.walls .row{font-size:14px}.dot{width:10px;height:10px;border-radius:50%;flex:none;background:#d6d6d2}.dot.over{background:var(--red)}.dot.ok{background:var(--green)}
-.walls .amt{font-variant-numeric:tabular-nums;font-weight:650;font-size:13px;width:84px;white-space:nowrap}.walls .d{flex:1;font-size:13px;line-height:1.45}.walls .d a{color:var(--ink-3);font-size:11px;text-decoration:none}
-.walls .st{font-size:12px;color:var(--ink-3);text-align:right;white-space:nowrap}
-.btn{display:block;width:100%;border:0;border-radius:12px;background:var(--accent);color:#fff;font:inherit;font-weight:650;font-size:16px;padding:13px;margin-top:16px;transition:transform .1s}
-.btn:active{transform:scale(.98)}.btn.sub{background:var(--card);color:var(--accent)}
-.note{font-size:12px;color:var(--ink-3);margin:10px 4px;line-height:1.6}.note a{color:var(--ink-2)}
-#cardimg{width:100%;border-radius:12px;margin-top:12px;display:none;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+:root{color-scheme:light dark;
+--ink:#1d1d1f;--ink-2:#4a4a4f;--ink-3:#66666b;--sep:rgba(60,60,67,.14);--bg:#f4f4f1;--card:#fff;--field:#f1f1ee;--seg:#e9e9e5;--seg-on:#fff;
+--accent:#c2410c;--accent-ink:#a3360a;--accent-tint:rgba(194,65,12,.09);--green:#0b7a4b;--red:#d70015;--bar:#ececE8;--top:rgba(248,248,245,.82);
+--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--r:18px;--r-s:10px;
+--f:-apple-system,BlinkMacSystemFont,"AJ Sans JP","Hiragino Sans","Noto Sans JP","Noto Sans CJK JP",system-ui,sans-serif;--ease:cubic-bezier(.2,.8,.2,1)}
+:lang(zh-CN){--f:-apple-system,BlinkMacSystemFont,"AJ Sans SC","PingFang SC","Noto Sans SC","Noto Sans CJK SC","Microsoft YaHei",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root{--ink:#f5f5f7;--ink-2:#c7c7cc;--ink-3:#a1a1a8;--sep:rgba(235,235,245,.13);--bg:#0e0e0f;--card:#1c1c1e;--field:#2a2a2d;--seg:#2a2a2d;--seg-on:#48484c;
+--accent:#ff8a4c;--accent-ink:#ffa070;--accent-tint:rgba(255,138,76,.14);--green:#34c77b;--red:#ff5a5f;--bar:#2c2c2f;--top:rgba(20,20,22,.78)}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--f);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+button{cursor:pointer;color:inherit}
+.top{position:sticky;top:0;z-index:5;height:calc(env(safe-area-inset-top,0px) + 52px);padding:env(safe-area-inset-top,0px) var(--s4) 0;display:flex;align-items:center;gap:var(--s2);background:var(--top);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);box-shadow:0 .5px 0 var(--sep)}
+.top b{font-size:17px;font-weight:700;letter-spacing:-.01em;white-space:nowrap}.top .sub{margin-left:auto;font-size:12px;color:var(--ink-3);white-space:nowrap}
+main{max-width:560px;margin:0 auto;padding:var(--s4) var(--s4) 56px}
+.hero{background:var(--card);border-radius:var(--r);padding:var(--s5) var(--s5) var(--s5);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.hero .k{font-size:14px;color:var(--ink-2);font-weight:500}
+.hero .n{display:flex;align-items:baseline;gap:6px;margin:2px 0 var(--s4);font-size:72px;font-weight:700;letter-spacing:-.035em;line-height:1.05;color:var(--accent);font-variant-numeric:tabular-nums}
+.hero .n small{font-size:20px;font-weight:600;letter-spacing:0;color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s2);margin-bottom:var(--s4)}
+.stats div{background:var(--field);border-radius:var(--r-s);padding:var(--s2) var(--s3)}
+.stats b{display:block;font-size:19px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.stats span{font-size:12px;color:var(--ink-3)}
+.bar{height:8px;border-radius:99px;background:var(--bar);overflow:hidden}.bar i{display:block;height:100%;width:0;border-radius:99px;background:var(--accent)}.ready .bar i{transition:width .5s var(--ease)}
+.bar.full i{background:var(--red)}
+.barl{display:flex;justify-content:space-between;gap:var(--s2);margin-top:6px;font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.hero .s{font-size:14px;color:var(--ink-2);margin-top:var(--s3)}.hero .s:empty{display:none}
+.hero .bind{display:inline-block;margin-top:var(--s3);font-size:13px;line-height:1.5;padding:6px var(--s3);border-radius:var(--r-s);background:var(--accent-tint);color:var(--accent-ink)}
+.sec{margin:var(--s5) var(--s1) var(--s2);font-size:13px;color:var(--ink-2);font-weight:600}
+.card{background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.row{display:flex;align-items:center;gap:var(--s3);min-height:52px;padding:var(--s2) var(--s4);position:relative}
+.row+.row:before{content:"";position:absolute;left:var(--s4);right:0;top:0;height:.5px;background:var(--sep)}
+.row label{flex:1;font-size:15px;line-height:1.4}.row .h{display:block;font-size:12px;color:var(--ink-3);margin-top:2px}
+.row input[type=number]{width:108px;text-align:right;font:inherit;font-weight:600;font-variant-numeric:tabular-nums;border:0;background:var(--field);border-radius:var(--r-s);padding:8px 10px;color:var(--ink);transition:box-shadow .15s}
+.row input:focus{outline:0;box-shadow:0 0 0 2px var(--accent)}.row .u{font-size:13px;color:var(--ink-2);min-width:30px}
+.seg{display:flex;background:var(--seg);border-radius:var(--r-s);padding:2px}.seg button{flex:1;white-space:nowrap;border:0;background:none;font:inherit;font-size:13px;padding:6px 12px;border-radius:8px;color:var(--ink-2);transition:background .15s,color .15s}
+.seg button.on{background:var(--seg-on);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.top .lang{flex:none}.top .lang button{flex:none;padding:3px 9px;font-size:12px}
+.sw{appearance:none;-webkit-appearance:none;margin:0;flex:none;width:48px;height:28px;border-radius:99px;background:var(--seg);position:relative;transition:background .2s;cursor:pointer}.sw:checked{background:var(--accent)}
+.sw:before{content:"";position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s var(--ease)}.sw:checked:before{left:22px}
+.sw:focus-visible{box-shadow:0 0 0 2px var(--accent)}
+.walls .row{align-items:flex-start;padding-top:var(--s3);padding-bottom:var(--s3)}.dot{width:8px;height:8px;margin-top:7px;border-radius:50%;flex:none;background:var(--ink-3)}.dot.over{background:var(--red)}.dot.ok{background:var(--green)}
+.walls .wl{flex:1;min-width:0}.walls .wt{display:flex;align-items:center;justify-content:space-between;gap:var(--s2);margin-bottom:2px}.walls .amt{font-variant-numeric:tabular-nums;font-weight:700;font-size:15px}.walls .d{display:block;font-size:13px;line-height:1.5;color:var(--ink-2)}.walls .d a{color:var(--ink-3);font-size:12px}
+.walls .st{font-size:12px;color:var(--ink-2);text-align:right;flex:none;white-space:nowrap;padding:2px 8px;border-radius:99px;background:var(--field);font-variant-numeric:tabular-nums}
+.walls .st.bad{color:var(--red);background:rgba(215,0,21,.08)}
+.walls .proj{font-size:13px;color:var(--ink-2)}
+.btn{display:block;width:100%;border:0;border-radius:14px;background:var(--accent);color:#fff;font:inherit;font-weight:700;font-size:16px;padding:14px;margin-top:var(--s4);transition:transform .12s var(--ease),opacity .2s}
+.btn:active{transform:scale(.98)}.btn:disabled{opacity:.6}.btn.sub{background:var(--card);color:var(--accent);margin-top:var(--s2)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.note{font-size:12px;color:var(--ink-3);margin:var(--s4) var(--s1);line-height:1.7}.note a{color:var(--ink-2)}.note b{color:var(--ink-2)}
+#cardimg{width:100%;border-radius:14px;margin-top:var(--s3);display:none;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:var(--bg);font-size:14px;font-weight:600;padding:10px 18px;border-radius:99px;transition:opacity .2s,transform .25s var(--ease);z-index:9;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
 .hide{display:none!important}
-.top .lang{margin-left:10px;flex:none}.top .lang button{flex:none;padding:3px 9px;font-size:12px}
-:lang(zh-CN) body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC","Noto Sans CJK SC","Microsoft YaHei",system-ui,sans-serif}
+@media (max-width:370px){.top .sub{display:none}.top .lang{margin-left:auto}.hero .n{font-size:64px}}
+@media (min-width:900px){main{padding-top:var(--s6)}}
+@media (prefers-reduced-motion:reduce){*,*:before{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
@@ -45,7 +68,9 @@ main{max-width:560px;margin:0 auto;padding:14px 16px 48px}
   <div class="hero" id="hero">
     <div class="k" id="hk" data-i18n="hkDefault">今年、扶養を外れずに働けるのは</div>
     <div class="n"><span id="hn">–</span><small data-i18n="hUnit">時間</small></div>
-    <div class="s" id="hs"></div>
+    <div class="stats"><div><b id="sW">–</b><span data-i18n="statW">時間 / 週</span></div><div><b id="sM">–</b><span data-i18n="statM">時間 / 月</span></div><div><b id="sY">–</b><span data-i18n="statY">あと稼げる</span></div></div>
+    <div class="bar" id="barw"><i id="bar"></i></div><div class="barl"><span id="bl"></span><span id="br"></span></div>
+    <div class="s" id="hs" aria-live="polite"></div>
     <div class="bind" id="hb"></div>
   </div>
 
@@ -77,6 +102,7 @@ main{max-width:560px;margin:0 auto;padding:14px 16px 48px}
 
   <button class="btn" id="mk" data-i18n="mk">結果を画像にする</button>
   <button class="btn sub hide" id="dl" data-i18n="dl">画像を保存 / 共有</button>
+  <div class="toast" id="toast" role="status"></div>
   <img id="cardimg" alt="結果カード" data-i18n-alt="alt">
 
   <p class="note">
@@ -107,6 +133,20 @@ const TXT = {
 };
 const label = w => Object.assign({label: man(w.amount)}, Object.fromEntries(Object.entries(TXT[w.id](w)).filter(([,v])=>v!==null)));
 let last = null;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let shown = null;
+function countTo(el, to){
+  if (reduce || shown === null || shown === to) { el.textContent = to.toLocaleString('ja-JP'); shown = to; return; }
+  const from = shown, t0 = performance.now(); shown = to;
+  const step = now => { const k = Math.min(1, (now - t0) / 380), e = 1 - Math.pow(1 - k, 3);
+    el.textContent = Math.round(from + (to - from) * e).toLocaleString('ja-JP'); if (k < 1 && shown === to) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
+const FIELDS = ['wage','ytd','pays','wk','tw','vw'], SKEY = 'atojikan.inputs';
+function save(){ try { localStorage.setItem(SKEY, JSON.stringify({v: Object.fromEntries(FIELDS.map(id => [id, $(id).value])), intl: $('intl').checked, young})); } catch(e){} }
+function restore(){ try { const o = JSON.parse(localStorage.getItem(SKEY) || 'null'); if (!o) return false;
+  FIELDS.forEach(id => { if (o.v && o.v[id] != null) $(id).value = o.v[id]; }); $('intl').checked = !!o.intl; young = o.young !== false;
+  document.querySelectorAll('#age button').forEach(x => x.classList.toggle('on', (x.dataset.v === '1922') === young)); return true; } catch(e){ return false; } }
 function calc(){
   if (!R) return;
   const wk = $('wk').value === '' ? null : +$('wk').value, intl = $('intl').checked;
@@ -114,54 +154,85 @@ function calc(){
   const wl = AtoJikan.weeksLeft();
   const r = AtoJikan.compute(R, {wage: $('wage').value, ytd: $('ytd').value, pays: $('pays').value, young, intl, termWeeks: $('tw').value, vacWeeks: $('vw').value, weekHours: wk, weeksLeft: wl});
   const ytd = +$('ytd').value || 0, wage = +$('wage').value || 0, T = label(r.target);
-  $('hn').textContent = r.hours.toLocaleString('ja-JP');
+  countTo($('hn'), r.hours);
   $('hk').textContent = r.bindLegal ? t('hkLegal') : t('hkMoney')(T.label);
-  $('hs').textContent = r.room <= 0 ? t('hsFull') : t('hs')(yen(r.roomUsed), r.perM, wl>0? r.perW.toFixed(1):'–');
+  $('sW').textContent = wl > 0 ? r.perW.toFixed(1) : '–';
+  $('sM').textContent = r.perM.toLocaleString('ja-JP');
+  $('sY').textContent = man(r.roomUsed);
+  const pct = Math.min(100, ytd / r.target.amount * 100);
+  $('bar').style.width = pct + '%'; $('barw').classList.toggle('full', r.room <= 0);
+  $('bl').textContent = t('barL')(man(ytd)); $('br').textContent = T.label;
+  $('hs').textContent = r.room <= 0 ? t('hsFull') : '';
   $('hb').textContent = r.bindLegal ? t('hbLegal')(r.moneyH) : (r.legalH!==null ? t('hbMoney')(r.legalH) : t('hbTarget')(T.label, T.d.replace(/\s*[（(].*/,'')));
   $('walls').innerHTML = r.walls.map((w,i) => {
-    const L = label(w), s = r.status[i];
+    const L = label(w), s = r.status[i], bad = s.over || s.projOver;
     const st = s.over ? t('stOver') : s.projOver ? t('stProj') : t('stLeft')(man(Math.max(0, w.at - ytd)));
-    return `<div class="row"><span class="dot ${s.over||s.projOver?'over':'ok'}"></span><span class="amt">${L.label}</span><span class="d">${L.d}<br><a href="${w.url}" target="_blank" rel="noopener">${t('src')}</a></span><span class="st">${st}</span></div>`;
-  }).join('') + (r.proj !== null ? `<div class="row"><span class="d" style="font-size:13px;color:var(--ink-2)">${t('proj')(wk, man(r.proj), man(AtoJikan.parentDed(R,ytd,young)), man(AtoJikan.parentDed(R,r.proj,young)))}</span></div>` : '');
-  last = {hours: r.hours, room: r.roomUsed, perW: r.perW, perM: r.perM, target: T, bindLegal: r.bindLegal, moneyH: r.moneyH, wage};
+    return `<div class="row"><span class="dot ${bad?'over':'ok'}"></span><div class="wl"><div class="wt"><span class="amt">${L.label}</span><span class="st${bad?' bad':''}">${st}</span></div><span class="d">${L.d} <a href="${w.url}" target="_blank" rel="noopener">${t('src')} ↗</a></span></div></div>`;
+  }).join('') + (r.proj !== null ? `<div class="row"><span class="proj">${t('proj')(wk, man(r.proj), man(AtoJikan.parentDed(R,ytd,young)), man(AtoJikan.parentDed(R,r.proj,young)))}</span></div>` : '');
+  last = {hours: r.hours, room: r.roomUsed, perW: r.perW, perM: r.perM, target: T, bindLegal: r.bindLegal, moneyH: r.moneyH, wage, ytd, pct, wl};
   $('dl').classList.add('hide'); $('cardimg').style.display = 'none';
+  save();
 }
-function card(){
-  const c = document.createElement('canvas'); c.width = 1080; c.height = 1350; const g = c.getContext('2d'); const F = getComputedStyle(document.body).fontFamily;
-  g.fillStyle = '#f5f5f2'; g.fillRect(0,0,1080,1350);
-  g.fillStyle = '#fff'; roundRect(g, 60, 60, 960, 1230, 48); g.fill();
-  g.fillStyle = '#86868b'; g.font = `600 34px ${F}`; g.fillText(`${R.year}年  あと何時間`, 120, 160);
-  g.fillStyle = '#1d1d1f'; g.font = `600 44px ${F}`; g.fillText(last.bindLegal ? '在留資格のルール内で、今年あと' : `${last.target.label}に収まるように、今年あと`, 120, 330);
-  g.fillStyle = '#c2410c'; g.font = `800 260px ${F}`; const t = last.hours.toLocaleString('ja-JP'); g.fillText(t, 112, 600);
-  const tw = g.measureText(t).width; g.fillStyle = '#1d1d1f'; g.font = `700 80px ${F}`; g.fillText('時間', 130 + tw, 600);
-  g.fillStyle = '#6e6e73'; g.font = `500 40px ${F}`;
-  g.fillText(`= 週あたり 約${last.perW.toFixed(1)}時間`, 120, 720);
-  g.fillText(`= 月あたり 約${last.perM}時間（給料あと${$('pays').value}回）`, 120, 785);
-  g.fillText(`あと ${yen(last.room)} ・ 時給 ${yen(last.wage)}`, 120, 850);
-  g.fillStyle = 'rgba(194,65,12,.09)'; roundRect(g, 120, 920, 840, 150, 28); g.fill();
-  g.fillStyle = '#a8380a'; g.font = `600 34px ${F}`;
-  wrap(g, last.bindLegal ? `週28時間ルールが先（お金の壁までなら${last.moneyH}時間）` : last.target.short, 150, 1008, 780, 46);
-  g.fillStyle = '#86868b'; g.font = `400 26px ${F}`;
-  g.fillText('令和8年分のルール（国税庁・日本年金機構・出入国在留管理庁）で計算', 120, 1160);
-  g.fillText('目安です。個別の判断は勤務先・保険者・税務署へ', 120, 1200);
+let toastT = 0;
+function toast(msg){ const el = $('toast'); el.textContent = msg; el.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('on'), 2200); }
+// ---- share card: 1600×2000 (4:5), stays readable when X shrinks it ----
+async function card(){
+  const W = 1600, H = 2000, c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
+  const F = getComputedStyle(document.body).fontFamily;
+  try { await Promise.all(['400','700'].map(w => document.fonts.load(`${w} 40px ${F}`, '0123456789時間小时'))); } catch(e){}
+  const P = 120;
+  g.fillStyle = '#f4f4f1'; g.fillRect(0,0,W,H);
+  g.fillStyle = '#fff'; roundRect(g, 64, 64, W-128, H-128, 64); g.fill();
+  g.textBaseline = 'alphabetic';
+  g.fillStyle = '#c2410c'; roundRect(g, P+8, 176, 20, 20, 10); g.fill();
+  g.fillStyle = '#4a4a4f'; g.font = `700 44px ${F}`; g.fillText(t('cTitle')(R.year), P+48, 200);
+  g.fillStyle = '#1d1d1f'; g.font = `700 64px ${F}`; wrap(g, last.bindLegal ? t('cLegal') : t('cMoney')(last.target.label), P+8, 400, W-2*P-16, 84);
+  g.fillStyle = '#c2410c'; g.font = `700 440px ${F}`; const n = last.hours.toLocaleString('ja-JP'); g.fillText(n, P-8, 860);
+  const nw = g.measureText(n).width; g.fillStyle = '#1d1d1f'; g.font = `700 112px ${F}`; g.fillText(t('cUnit'), P + nw + 16, 860);
+  // three stats
+  const sw = (W - 2*P - 2*32) / 3, st = [[last.wl>0?last.perW.toFixed(1):'–', t('statW')], [last.perM.toLocaleString('ja-JP'), t('statM')], [man(last.room), t('statY')]];
+  st.forEach(([v,l],i) => { const x = P + i*(sw+32); g.fillStyle = '#f1f1ee'; roundRect(g, x, 960, sw, 220, 32); g.fill();
+    g.fillStyle = '#1d1d1f'; g.font = `700 80px ${F}`; fit(g, v, 80, sw-72); g.fillText(v, x+36, 1080);
+    g.fillStyle = '#4a4a4f'; g.font = `400 40px ${F}`; g.fillText(l, x+36, 1144); });
+  // progress
+  g.fillStyle = '#ececE8'; roundRect(g, P, 1260, W-2*P, 28, 14); g.fill();
+  g.fillStyle = last.room <= 0 ? '#d70015' : '#c2410c'; roundRect(g, P, 1260, Math.max(28,(W-2*P)*last.pct/100), 28, 14); g.fill();
+  g.fillStyle = '#4a4a4f'; g.font = `400 40px ${F}`; g.fillText(t('barL')(man(last.ytd)), P, 1350);
+  const rl = last.target.label; g.fillText(rl, W - P - g.measureText(rl).width, 1350);
+  // callout
+  g.fillStyle = 'rgba(194,65,12,.09)'; roundRect(g, P, 1430, W-2*P, 220, 40); g.fill();
+  g.fillStyle = '#a3360a'; g.font = `700 52px ${F}`;
+  wrap(g, last.bindLegal ? t('hbLegal')(last.moneyH) : last.target.short, P+56, 1522, W-2*P-112, 72);
+  g.fillStyle = '#66666b'; g.font = `400 36px ${F}`;
+  g.fillText(t('cF1'), P, 1756); g.fillText(t('cF2'), P, 1812);
+  g.fillStyle = '#4a4a4f'; g.font = `700 36px ${F}`; g.fillText('jasonin2099.github.io/ato-jikan', P, 1868);
   return c;
 }
-function roundRect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
-function wrap(g,s,x,y,mw,lh){let line='';for(const ch of s){if(g.measureText(line+ch).width>mw){g.fillText(line,x,y);y+=lh;line=ch}else line+=ch}g.fillText(line,x,y)}
+function fit(g,s,px,mw){ let p = px; while (p > 30 && g.measureText(s).width > mw) { p -= 4; g.font = g.font.replace(/\d+px/, p+'px'); } }
+function roundRect(g,x,y,w,h,r){r=Math.min(r,w/2,h/2);g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
+function wrap(g,s,x,y,mw,lh){const words=/[\u3000-\u9fff\uff00-\uffef]/.test(s)?[...s]:s.split(/(?<= )/);let line='';for(const w of words){if(line&&g.measureText(line+w).width>mw){g.fillText(line.trimEnd(),x,y);y+=lh;line=w.trimStart()}else line+=w}g.fillText(line,x,y)}
 // ---- events ----
 document.querySelectorAll('#age button').forEach(b => b.onclick = () => { document.querySelectorAll('#age button').forEach(x=>x.classList.toggle('on', x===b)); young = b.dataset.v === '1922'; calc(); });
 ['wage','ytd','pays','wk','tw','vw','intl'].forEach(id => $(id).addEventListener('input', calc));
 $('tw').value = Math.floor(AtoJikan.weeksLeft());
+restore();
 let blob = null;
 I18N.apply();
 document.querySelectorAll('#lang button').forEach(b => b.onclick = () => { I18N.set(b.dataset.l); calc(); });
-$('mk').onclick = () => { const c = card(); $('cardimg').src = c.toDataURL('image/png'); $('cardimg').style.display = 'block'; c.toBlob(b => { blob = b; $('dl').classList.remove('hide'); }); };
+$('mk').onclick = async () => {
+  $('mk').disabled = true;
+  const c = await card(); $('cardimg').src = c.toDataURL('image/png'); $('cardimg').style.display = 'block';
+  c.toBlob(b => { blob = b; $('dl').classList.remove('hide'); $('mk').disabled = false; toast(t('tMade'));
+    $('cardimg').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'center'}); }, 'image/png');
+};
 $('dl').onclick = async () => {
   const f = new File([blob], `atojikan-${R.year}.png`, {type:'image/png'});
-  if (navigator.canShare && navigator.canShare({files:[f]})) { try { await navigator.share({files:[f], title:t('brand')}); return; } catch(e){} }
-  const a = document.createElement('a'); a.href = URL.createObjectURL(f); a.download = f.name; a.click();
+  if (navigator.canShare && navigator.canShare({files:[f]})) { try { await navigator.share({files:[f], title:t('brand')}); return; } catch(e){ if (e.name === 'AbortError') return; } }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(f); a.download = f.name; a.click(); toast(t('tSaved'));
 };
-fetch('rules/2026.json').then(r=>r.json()).then(j=>{R=j;calc();}).catch(()=>{$('hs').textContent=t('loadErr');});
+if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
+fetch('rules/2026.json').then(r=>r.json()).then(j=>{R=j;calc();requestAnimationFrame(()=>document.body.classList.add("ready"));}).catch(()=>{$('hs').textContent=t('loadErr');});
 </script>
+
 </body>
 </html>
