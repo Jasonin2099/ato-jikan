@@ -3,7 +3,7 @@
   const KEY = 'atojikan.lang', LANGS = ['ja', 'zh', 'en'];
   const S = {
     ja: {
-      statW: '時間 / 週', statM: '時間 / 月', statY: 'あと稼げる', barL: m => `受け取り済み ${m}`, tMade: '画像ができました', tSaved: '画像を保存しました', hsFull: 'もう壁に届いています。今年はおつかれさまでした',
+      mkBusy: '作成中…', loading: '読み込み中…', tShared: '共有しました', cWalls: '今年の壁', cSrc: '出典：国税庁・日本年金機構・出入国在留管理庁（2026年分）', statW: '時間 / 週', statM: '時間 / 月', statY: 'あと稼げる', barL: m => `受け取り済み ${m}`, tMade: '画像ができました', tSaved: '画像を保存しました', hsFull: 'もう壁に届いています。今年はおつかれさまでした',
       introH: '扶養の壁まで、今年あと何時間？', introP: '時給と今年の収入を入れるだけ。150万・178万などの壁の手前で、あと何時間働けるかを逆算します。留学生の週28時間ルールにも対応。', miniK: '今年あと', htmlLang: 'ja', title: 'あと何時間 — 学生バイトの年収の壁 逆算（2026年分）', brand: 'あと何時間', sub: '2026年分（令和8年）',
       hkDefault: '今年、扶養を外れずに働けるのは', hUnit: '時間',
       secYou: 'あなたについて', age: '12月31日時点の年齢', age1922: '19〜22歳', ageOther: 'それ以外',
@@ -36,7 +36,7 @@
       cF1: '令和8年分のルール（国税庁・日本年金機構・出入国在留管理庁）で計算', cF2: '目安です。個別の判断は勤務先・保険者・税務署へ'
     },
     zh: {
-      statW: '小时 / 周', statM: '小时 / 月', statY: '还能挣', barL: m => `已领 ${m}`, tMade: '结果图做好了', tSaved: '图片已保存', hsFull: '已经到线了，今年辛苦啦',
+      mkBusy: '正在生成…', loading: '加载中…', tShared: '已分享', cWalls: '今年的几道线', cSrc: '依据：国税厅、日本年金机构、出入国在留管理厅（2026年）', statW: '小时 / 周', statM: '小时 / 月', statY: '还能挣', barL: m => `已领 ${m}`, tMade: '结果图做好了', tSaved: '图片已保存', hsFull: '已经到线了，今年辛苦啦',
       introH: '离年收入上限，今年还能打几小时？', introP: '填上时薪和今年已到手的工资，就能倒推出在各道「年收入之墙」之前还能打几小时工。留学生每周 28 小时的上限也一起算。', miniK: '今年还能打', htmlLang: 'zh-CN', title: '还能打几小时 — 在日学生打工年收入之壁倒推（2026年）', brand: '还能打几小时', sub: '2026年（令和8年）规则',
       hkDefault: '今年不超出扶養范围，还能打', hUnit: '小时',
       secYou: '关于你', age: '截至12月31日的年龄', age1922: '19〜22岁', ageOther: '其他',
@@ -69,7 +69,7 @@
       cF1: '按令和8年（2026年）规则计算（国税厅・日本年金机构・出入国在留管理厅）', cF2: '仅供参考，具体请向打工单位、保险方或税务署确认'
     },
     en: {
-      statW: 'h / week', statM: 'h / month', statY: 'left to earn', barL: m => `${m} paid`, tMade: 'Image ready', tSaved: 'Image saved', hsFull: 'You have hit the line. Rest up, you earned it.',
+      mkBusy: 'Making…', loading: 'Loading…', tShared: 'Shared', cWalls: 'This year\'s walls', cSrc: 'Sources: NTA, Japan Pension Service, Immigration Services Agency (2026)', statW: 'h / week', statM: 'h / month', statY: 'left to earn', barL: m => `${m} paid`, tMade: 'Image ready', tSaved: 'Image saved', hsFull: 'You have hit the line. Rest up, you earned it.',
       introH: 'How many more hours can you work this year?', introP: 'Enter your hourly wage and what you have earned so far. We work back from Japan\'s income walls (1.5M yen and more) and the 28-hour weekly limit for international students.', miniK: 'Left this year', htmlLang: 'en', title: 'ato-jikan — how many more hours can a student work in Japan (2026)', brand: 'ato-jikan', sub: '2026 rules',
       hkDefault: 'Staying a dependent, this year you can still work', hUnit: 'hours',
       secYou: 'About you', age: 'Age on Dec 31', age1922: '19–22', ageOther: 'Other',
