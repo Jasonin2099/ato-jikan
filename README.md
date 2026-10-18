@@ -1,6 +1,10 @@
 # あと何時間（ato-jikan）
 
-[![license](https://img.shields.io/github/license/Jasonin2099/ato-jikan?style=flat&color=555)](LICENSE) [![last commit](https://img.shields.io/github/last-commit/Jasonin2099/ato-jikan?style=flat&color=555)](https://github.com/Jasonin2099/ato-jikan/commits) [![demo](https://img.shields.io/badge/demo-GitHub%20Pages-555?style=flat)](https://jasonin2099.github.io/ato-jikan/) [![stars](https://img.shields.io/github/stars/Jasonin2099/ato-jikan?style=flat&color=555)](https://github.com/Jasonin2099/ato-jikan/stargazers)
+[![demo](https://img.shields.io/badge/demo-live-DA291C?style=flat)](https://jasonin2099.github.io/ato-jikan/)
+[![stars](https://img.shields.io/github/stars/Jasonin2099/ato-jikan?style=flat&label=stars&color=1D1D1F&logo=github)](https://github.com/Jasonin2099/ato-jikan/stargazers)
+[![last commit](https://img.shields.io/github/last-commit/Jasonin2099/ato-jikan?style=flat&label=last%20commit&color=1A7F37)](https://github.com/Jasonin2099/ato-jikan/commits/main)
+[![license](https://img.shields.io/github/license/Jasonin2099/ato-jikan?style=flat&label=license&color=6E6E73)](LICENSE)
+[![HTML5](https://img.shields.io/badge/HTML5-3C3C43?style=flat&logo=html5&logoColor=white)](https://developer.mozilla.org/docs/Web/HTML)
 
 [English](README.en.md) ・ [中文](README.zh.md)
 
