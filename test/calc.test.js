@@ -69,3 +69,13 @@ test('weeksLeft is 0 on Dec 31 night and ~52 on Jan 1', () => {
   assert.strictEqual(C.weeksLeft(new Date(2026, 11, 31, 23, 59)), 0);
   assert.ok(Math.abs(C.weeksLeft(new Date(2026, 0, 1)) - 52.1) < 0.2);
 });
+test('term + vacation weeks are capped at the weeks left in the year', () => {
+  const r = C.compute(R, { ...base, ytd: 0, intl: true, termWeeks: 30, vacWeeks: 2, weeksLeft: 10 });
+  assert.strictEqual(r.legalH, 8 * 28 + 2 * 40);
+  const v = C.compute(R, { ...base, ytd: 0, intl: true, termWeeks: 5, vacWeeks: 20, weeksLeft: 3.4 });
+  assert.strictEqual(v.legalH, 4 * 40);
+});
+test('without weeksLeft, weeks are taken as typed', () => {
+  const { weeksLeft, ...noWl } = base;
+  assert.strictEqual(C.compute(R, { ...noWl, ytd: 0, intl: true, termWeeks: 30, vacWeeks: 0 }).legalH, 30 * 28);
+});

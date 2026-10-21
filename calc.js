@@ -37,9 +37,12 @@
     const target = W.find(w => w.id === 'shaho');
     const room = Math.max(0, target.at - ytd);
     const moneyH = wage > 0 ? Math.floor(room / wage) : 0;
-    const legalH = i.intl ? Math.max(0, +i.termWeeks || 0) * R.intlWeek.value + Math.max(0, +i.vacWeeks || 0) * R.intlVacWeek.value : null;
-    const hours = legalH === null ? moneyH : Math.min(moneyH, legalH);
     const wl = Math.max(0, +i.weeksLeft || 0);
+    // term + vacation weeks can't exceed what is left of the year (stale saved values, typos)
+    const cap = i.weeksLeft != null ? Math.ceil(wl) : Infinity;
+    const vacW = Math.min(cap, Math.max(0, +i.vacWeeks || 0)), termW = Math.min(cap - vacW, Math.max(0, +i.termWeeks || 0));
+    const legalH = i.intl ? termW * R.intlWeek.value + vacW * R.intlVacWeek.value : null;
+    const hours = legalH === null ? moneyH : Math.min(moneyH, legalH);
     const proj = i.weekHours != null && wage > 0 ? ytd + wage * i.weekHours * wl : null;
     return {
       hours, moneyH, legalH, room, target, walls: W, proj,
