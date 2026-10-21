@@ -10,6 +10,8 @@
 <meta property="og:url" content="https://jasonin2099.github.io/ato-jikan/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f4f4f1" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0e0e0f" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.png">
 <title>あと何時間 — 学生バイトの年収の壁 逆算（2026年分）</title>
 <script>/* preload only the active language's font (same order as I18N.detect) */
 (function(){var L=['ja','zh','en'],l=new URLSearchParams(location.search).get('lang');
@@ -237,9 +239,13 @@ function countTo(el, to){
   requestAnimationFrame(step);
 }
 const FIELDS = ['wage','ytd','pays','wk','tw','vw'], SKEY = 'atojikan.inputs';
-function save(){ try { localStorage.setItem(SKEY, JSON.stringify({v: Object.fromEntries(FIELDS.map(id => [id, $(id).value])), intl: $('intl').checked, young})); } catch(e){} }
+// ytd / paydays / weeks only make sense for the year they were typed in; wage, age, visa and pace carry over
+const YEARLY = ['ytd','pays','tw','vw'];
+function save(){ try { localStorage.setItem(SKEY, JSON.stringify({y: new Date().getFullYear(), v: Object.fromEntries(FIELDS.map(id => [id, $(id).value])), intl: $('intl').checked, young})); } catch(e){} }
 function restore(){ try { const o = JSON.parse(localStorage.getItem(SKEY) || 'null'); if (!o) return false;
-  FIELDS.forEach(id => { if (o.v && o.v[id] != null) $(id).value = o.v[id]; }); $('intl').checked = !!o.intl; young = o.young !== false;
+  const sameYear = o.y === new Date().getFullYear();
+  FIELDS.forEach(id => { if (o.v && o.v[id] != null && (sameYear || !YEARLY.includes(id))) $(id).value = o.v[id]; });
+  if (!sameYear) $('ytd').value = 0; $('intl').checked = !!o.intl; young = o.young !== false;
   document.querySelectorAll('#age button').forEach(x => x.classList.toggle('on', (x.dataset.v === '1922') === young)); return true; } catch(e){ return false; } }
 function calc(){
   if (!R) return;
@@ -333,13 +339,13 @@ $('mk').onclick = async () => {
   const b = $('mk'); b.disabled = true; b.classList.add('busy'); b.setAttribute('aria-busy','true'); b.querySelector('[data-i18n]').textContent = t('mkBusy');
   await new Promise(r => requestAnimationFrame(() => setTimeout(r)));
   const c = await card(); $('cardimg').src = c.toDataURL('image/png'); $('cardimg').style.display = 'block';
-  c.toBlob(b => { blob = b; $('dl').classList.remove('hide'); b.disabled = false; b.classList.remove('busy'); b.removeAttribute('aria-busy'); b.querySelector('[data-i18n]').textContent = t('mk'); toast(t('tMade'));
+  c.toBlob(png => { blob = png; $('dl').classList.remove('hide'); b.disabled = false; b.classList.remove('busy'); b.removeAttribute('aria-busy'); b.querySelector('[data-i18n]').textContent = t('mk'); toast(t('tMade'));
     $('cardimg').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'center'}); }, 'image/png');
 };
 $('dl').onclick = async () => {
   const f = new File([blob], `atojikan-${R.year}.png`, {type:'image/png'});
   if (navigator.canShare && navigator.canShare({files:[f]})) { try { await navigator.share({files:[f], title:t('brand')}); toast(t('tShared')); return; } catch(e){ if (e.name === 'AbortError') return; } }
-  const a = document.createElement('a'); a.href = URL.createObjectURL(f); a.download = f.name; a.click(); toast(t('tSaved'));
+  const a = document.createElement('a'); a.href = URL.createObjectURL(f); a.download = f.name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1e4); toast(t('tSaved'));
 };
 // compact summary while the hero is scrolled away (hidden on desktop by CSS)
 if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => {
@@ -353,6 +359,7 @@ addEventListener('pagehide', () => { try { sessionStorage.setItem(SY, String(scr
 function restoreScroll(){ try { const y = +sessionStorage.getItem(SY); const nav = (performance.getEntriesByType('navigation')[0] || {}).type;
   if (y && (nav === 'back_forward' || nav === 'reload')) scrollTo(0, y); } catch(e){} }
 $('hero').classList.add('loading'); $('hero').setAttribute('aria-busy','true'); $('hs').textContent = t('loading');
+if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(()=>{});
 fetch('rules/2026.json').then(r=>r.json()).then(j=>{R=j;$('hero').classList.remove('loading');$('hero').removeAttribute('aria-busy');calc();restoreScroll();requestAnimationFrame(()=>document.body.classList.add("ready"));}).catch(()=>{$('hs').textContent=t('loadErr');});
 </script>
 

@@ -1,0 +1,14 @@
+{
+  "name": "あと何時間 — 学生バイトの年収の壁",
+  "short_name": "あと何時間",
+  "description": "扶養の壁（2026年分）まで今年あと何時間働けるかを逆算 / 还能打几小时 / ato-jikan",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f4f1",
+  "theme_color": "#c2410c",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

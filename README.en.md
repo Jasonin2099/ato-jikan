@@ -15,6 +15,7 @@ A tool for students with part-time jobs in Japan: it works out **how many more h
 - International-student mode: 28 h/week during term, 40 h/week during long vacations
 - Japanese / Chinese / English (follows your browser, remembers your choice), dark mode
 - Everything runs on your device. Nothing is sent anywhere.
+- Works offline once opened, and can be added to the home screen.
 
 ## Rules and sources
 All numbers live in [`rules/2026.json`](rules/2026.json). Each entry cites its official source (National Tax Agency No.1177 / 1410 / 1199 / 1180, the 2026 tax reform, Japan Pension Service, Immigration Services Agency) and its year.
