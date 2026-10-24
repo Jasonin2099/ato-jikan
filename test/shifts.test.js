@@ -70,3 +70,13 @@ test('room on a date is the tightest of its 7 windows', () => {
   assert.strictEqual(S.roomOn(R, s, [], '2026-11-20'), 28);
   assert.strictEqual(S.roomOn(R, [sh('2027-02-15', '09:00', '14:00')], VAC, '2027-02-15'), 3);
 });
+
+test('income is summed per employer, planned shifts counted separately', () => {
+  const jobs = [{ id: 'a', name: 'Cafe', wage: 1100 }, { id: 'b', name: 'Juku', wage: 1500 }];
+  const r = S.byJob(jobs, [sh('2026-10-20', '10:00', '14:00', 'a'), sh('2026-10-30', '18:00', '21:00', 'b'), { date: '2026-11-01', hours: 2, job: 'b' }], '2026-10-24');
+  assert.strictEqual(r.rows[0].income, 4400); assert.strictEqual(r.rows[1].hours, 5);
+  assert.strictEqual(r.income, 4400 + 7500); assert.strictEqual(r.future, 7500);
+});
+test('a shift with an unknown job falls back to the first job', () => {
+  assert.strictEqual(S.byJob([{ id: 'a', wage: 1000 }], [{ date: '2026-10-01', hours: 3, job: 'zzz' }], '2026-10-24').income, 3000);
+});
