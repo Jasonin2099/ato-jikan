@@ -144,5 +144,5 @@
     document.querySelectorAll('#lang button').forEach(b => b.classList.toggle('on', b.dataset.l === lang));
   }
   function set(l) { if (!LANGS.includes(l)) return; lang = l; try { localStorage.setItem(KEY, l); } catch (e) {} apply(); }
-  root.I18N = { t, apply, set, get lang() { return lang; } };
+  root.I18N = { t, apply, set, strings: S, get lang() { return lang; } };
 })(self);
