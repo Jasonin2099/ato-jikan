@@ -196,6 +196,15 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
     <div class="row"><label data-i18n="wk">いまの週の勤務時間<span class="h">任意。このペースで年末にいくらか</span></label><input type="number" id="wk" value="" min="0" placeholder="例 15" data-i18n-ph="wkPh" inputmode="decimal"><span class="u">h</span></div>
   </div>
 
+  <div class="sec"><svg class="ic" aria-hidden="true"><use href="#i-briefcase-business"/></svg><span data-i18n="secShift">シフト・バイト先</span></div>
+  <div class="card lst">
+    <div class="row"><label data-i18n="jobsL">バイト先</label><button class="mini" id="addJob" data-i18n="addJob">＋ バイト先</button></div>
+    <div id="jobs"></div>
+    <div class="row"><label data-i18n="shiftsL">シフト</label><button class="mini" id="addShift" data-i18n="addShift">＋ シフト</button></div>
+    <div id="shifts"></div>
+    <div class="row hide" id="jobsumr"><span class="roll" id="jobsum"></span></div>
+  </div>
+
   <div id="intlbox" class="hide">
     <div class="sec"><svg class="ic" aria-hidden="true"><use href="#i-plane"/></svg><span data-i18n="secIntl">留学生：残りの期間（今日〜12/31）</span></div>
     <div class="card">
@@ -219,6 +228,7 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
 </main>
 <script src="i18n.js"></script>
 <script src="calc.js"></script>
+<script src="shifts.js"></script>
 <script>
 let R = null;
 const t = k => I18N.t(k);
@@ -253,6 +263,33 @@ function restore(){ try { const o = JSON.parse(localStorage.getItem(SKEY) || 'nu
   FIELDS.forEach(id => { if (o.v && o.v[id] != null && (sameYear || !YEARLY.includes(id))) $(id).value = o.v[id]; });
   if (!sameYear) $('ytd').value = 0; $('intl').checked = !!o.intl; young = o.young !== false;
   document.querySelectorAll('#age button').forEach(x => x.classList.toggle('on', (x.dataset.v === '1922') === young)); return true; } catch(e){ return false; } }
+// ---- shifts & employers: stored only in this browser ----
+const SH = 'atojikan.shifts';
+let ST = {jobs: [], shifts: [], vac: []};
+try { const o = JSON.parse(localStorage.getItem(SH) || 'null'); if (o) ST = Object.assign(ST, o); } catch(e){}
+const saveST = () => { try { localStorage.setItem(SH, JSON.stringify(ST)); } catch(e){} };
+const uid = () => Math.random().toString(36).slice(2, 8);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const today = () => { const d = new Date(); return new Date(d - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); };
+const fh = h => (Math.round(h * 10) / 10).toLocaleString('ja-JP');
+function renderLists(){
+  const del = `<button class="x" data-del aria-label="${esc(t('del'))}">×</button>`;
+  $('jobs').innerHTML = ST.jobs.map((j,i) => `<div class="row" data-k="jobs" data-i="${i}"><input type="text" data-f="name" value="${esc(j.name)}" placeholder="${esc(t('jobPh'))}" aria-label="${esc(t('jobPh'))}"><input type="number" data-f="wage" value="${esc(j.wage)}" min="0" inputmode="numeric" aria-label="wage"><span class="u">${t('uYen')}</span>${del}</div>`).join('');
+  const opts = sel => ST.jobs.map(j => `<option value="${j.id}"${j.id === sel ? ' selected' : ''}>${esc(j.name || '—')}</option>`).join('');
+  $('shifts').innerHTML = ST.shifts.map((s,i) => `<div class="row" data-k="shifts" data-i="${i}"><input type="date" data-f="date" value="${esc(s.date)}"><input type="time" data-f="start" value="${esc(s.start)}"><input type="time" data-f="end" value="${esc(s.end)}"><input type="number" data-f="hours" value="${esc(s.hours)}" min="0" step="0.25" placeholder="h" inputmode="decimal" aria-label="h"><select data-f="job">${opts(s.job)}</select>${del}</div>`).join('');
+  if ($('vacs')) $('vacs').innerHTML = ST.vac.map((v,i) => `<div class="row" data-k="vac" data-i="${i}"><input type="date" data-f="from" value="${esc(v.from)}"><span class="u">–</span><input type="date" data-f="to" value="${esc(v.to)}">${del}</div>`).join('');
+}
+document.addEventListener('input', e => { const r = e.target.closest('[data-k]'); if (!r || !e.target.dataset.f) return;
+  ST[r.dataset.k][+r.dataset.i][e.target.dataset.f] = e.target.value; saveST(); if (r.dataset.k === 'jobs' && e.target.dataset.f === 'name') { const j = ST.jobs[+r.dataset.i];
+    document.querySelectorAll(`option[value="${j.id}"]`).forEach(o => o.textContent = j.name || '—'); } calc(); });
+document.addEventListener('click', e => { if (!e.target.closest('[data-del]')) return; const r = e.target.closest('[data-k]');
+  ST[r.dataset.k].splice(+r.dataset.i, 1); saveST(); renderLists(); calc(); });
+function shiftsUI(){
+  const by = AtoShifts.byJob(ST.jobs, ST.shifts, today());
+  $('jobsumr').classList.toggle('hide', !ST.shifts.length);
+  $('jobsum').innerHTML = esc(t('jobSum')(fh(by.hours), yen(by.income), yen(by.future))) + (by.rows.length > 1 ? by.rows.map(r => `<span class="h">${esc(r.name || '—')} · ${fh(r.hours)} h · ${yen(r.income)}</span>`).join('') : '');
+  return by;
+}
 function calc(){
   if (!R) return;
   const wk = $('wk').value === '' ? null : +$('wk').value, intl = $('intl').checked;
@@ -279,6 +316,7 @@ function calc(){
   $('ms').textContent = wl > 0 ? `${r.perW.toFixed(1)} ${t('statW')}` : '';
   last = {walls: r.walls.map((w,i) => ({label: label(w).label, bad: r.status[i].over || r.status[i].projOver, left: Math.max(0, w.at - ytd)})), hours: r.hours, room: r.roomUsed, perW: r.perW, perM: r.perM, target: T, bindLegal: r.bindLegal, moneyH: r.moneyH, wage, ytd, pct, wl};
   $('dl').classList.add('hide'); $('cardimg').style.display = 'none';
+  shiftsUI();
   save();
 }
 let toastT = 0;
@@ -338,9 +376,13 @@ document.querySelectorAll('#age button').forEach(b => b.onclick = () => { docume
 ['wage','ytd','pays','wk','tw','vw','intl'].forEach(id => $(id).addEventListener('input', calc));
 $('tw').value = Math.floor(AtoJikan.weeksLeft());
 restore();
+renderLists();
+$('addJob').onclick = () => { ST.jobs.push({id: uid(), name: '', wage: $('wage').value}); saveST(); renderLists(); calc(); };
+$('addShift').onclick = () => { if (!ST.jobs.length) ST.jobs.push({id: uid(), name: '', wage: $('wage').value}); const p = ST.shifts[ST.shifts.length - 1];
+  ST.shifts.push({date: today(), start: p ? p.start : '10:00', end: p ? p.end : '15:00', hours: '', job: p ? p.job : ST.jobs[0].id}); saveST(); renderLists(); calc(); };
 let blob = null;
 I18N.apply();
-document.querySelectorAll('#lang button').forEach(b => b.onclick = () => { I18N.set(b.dataset.l); calc(); });
+document.querySelectorAll('#lang button').forEach(b => b.onclick = () => { I18N.set(b.dataset.l); renderLists(); calc(); });
 $('mk').onclick = async () => {
   const b = $('mk'); b.disabled = true; b.classList.add('busy'); b.setAttribute('aria-busy','true'); b.querySelector('[data-i18n]').textContent = t('mkBusy');
   await new Promise(r => requestAnimationFrame(() => setTimeout(r)));
