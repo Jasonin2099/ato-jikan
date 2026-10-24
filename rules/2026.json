@@ -9,5 +9,6 @@
   "tokutei": { "table": [[850000,630000],[900000,610000],[950000,510000],[1000000,410000],[1050000,310000],[1100000,210000],[1150000,110000],[1200000,60000],[1230000,30000]], "desc": "特定親族特別控除：[子の合計所得の上限, 親の控除額]", "source": "国税庁 タックスアンサー No.1177 特定親族特別控除", "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1177.htm", "year": 2026 },
   "shaho": { "young": 1500000, "other": 1300000, "desc": "健康保険の被扶養者認定：年間収入見込み 19〜22歳は150万円未満、それ以外は130万円未満", "source": "日本年金機構 19歳以上23歳未満の被扶養者認定における年間収入要件", "url": "https://www.nenkin.go.jp/oshirase/taisetu/2025/202508/0819.html", "year": 2026 },
   "intlWeek": { "value": 28, "desc": "留学生の資格外活動：週28時間以内", "source": "出入国在留管理庁 資格外活動許可", "url": "https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00003.html", "year": 2026 },
+  "intlVacDay": { "value": 8, "desc": "留学生の資格外活動：教育機関の長期休業期間は1日8時間以内", "source": "出入国在留管理庁 資格外活動許可", "url": "https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00003.html", "year": 2026 },
   "intlVacWeek": { "value": 40, "desc": "長期休業中は1日8時間以内。本ツールは保守的に週40時間（労働基準法第32条）で計算", "source": "出入国在留管理庁 資格外活動許可 / 労働基準法 第32条", "url": "https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00003.html", "year": 2026 }
 }
