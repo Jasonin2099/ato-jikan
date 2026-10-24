@@ -190,10 +190,10 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
 
   <div class="sec"><svg class="ic" aria-hidden="true"><use href="#i-briefcase-business"/></svg><span data-i18n="secJob">バイト</span></div>
   <div class="card">
-    <div class="row"><label data-i18n="wage">時給<span class="h">交通費は含めない</span></label><input type="number" id="wage" value="1200" min="1" inputmode="numeric"><span class="u" data-i18n="uYen">円</span></div>
-    <div class="row"><label data-i18n="ytd">今年受け取った額<span class="h">1月〜今日。明細の「総支給額」の合計</span></label><input type="number" id="ytd" value="980000" min="0" inputmode="numeric"><span class="u" data-i18n="uYen">円</span></div>
-    <div class="row"><label data-i18n="pays">給料日の残り回数<span class="h">12月分が1月払いなら来年に数える</span></label><input type="number" id="pays" value="3" min="1" max="12" inputmode="numeric"><span class="u" data-i18n="uTimes">回</span></div>
-    <div class="row"><label data-i18n="wk">いまの週の勤務時間<span class="h">任意。このペースで年末にいくらか</span></label><input type="number" id="wk" value="" min="0" placeholder="例 15" data-i18n-ph="wkPh" inputmode="decimal"><span class="u">h</span></div>
+    <div class="row"><label data-i18n="wage">時給<span class="h">交通費は含めない</span></label><input type="number" id="wage" value="1200" min="1" step="1" inputmode="numeric"><span class="u" data-i18n="uYen">円</span></div>
+    <div class="row"><label data-i18n="ytd">今年受け取った額<span class="h">1月〜今日。明細の「総支給額」の合計</span></label><input type="number" id="ytd" value="980000" min="0" step="1" inputmode="numeric"><span class="u" data-i18n="uYen">円</span></div>
+    <div class="row"><label data-i18n="pays">給料日の残り回数<span class="h">12月分が1月払いなら来年に数える</span></label><input type="number" id="pays" value="3" min="1" max="12" step="1" inputmode="numeric"><span class="u" data-i18n="uTimes">回</span></div>
+    <div class="row"><label data-i18n="wk">いまの週の勤務時間<span class="h">任意。このペースで年末にいくらか</span></label><input type="number" id="wk" value="" min="0" max="168" step="0.5" placeholder="例 15" data-i18n-ph="wkPh" inputmode="decimal"><span class="u">h</span></div>
   </div>
 
   <div class="sec"><svg class="ic" aria-hidden="true"><use href="#i-briefcase-business"/></svg><span data-i18n="secShift">シフト・バイト先</span></div>
@@ -208,8 +208,8 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
   <div id="intlbox" class="hide">
     <div class="sec"><svg class="ic" aria-hidden="true"><use href="#i-plane"/></svg><span data-i18n="secIntl">留学生：残りの期間（今日〜12/31）</span></div>
     <div class="card">
-      <div class="row"><label data-i18n="tw">授業期間の週数<span class="h">週28時間まで</span></label><input type="number" id="tw" min="0" inputmode="numeric"><span class="u" data-i18n="uWeek">週</span></div>
-      <div class="row"><label data-i18n="vw">長期休業の週数<span class="h">学則で定める休み。1日8時間まで（本ツールは週40hで計算）</span></label><input type="number" id="vw" value="0" min="0" inputmode="numeric"><span class="u" data-i18n="uWeek">週</span></div>
+      <div class="row"><label data-i18n="tw">授業期間の週数<span class="h">週28時間まで</span></label><input type="number" id="tw" min="0" max="53" step="1" inputmode="numeric"><span class="u" data-i18n="uWeek">週</span></div>
+      <div class="row"><label data-i18n="vw">長期休業の週数<span class="h">学則で定める休み。1日8時間まで（本ツールは週40hで計算）</span></label><input type="number" id="vw" value="0" min="0" max="53" step="1" inputmode="numeric"><span class="u" data-i18n="uWeek">週</span></div>
     </div>
   </div>
 
@@ -235,9 +235,9 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
     Icons: <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a> (ISC License)
   </p>
 </main>
-<script src="i18n.js"></script>
-<script src="calc.js"></script>
-<script src="shifts.js"></script>
+<script src="i18n.js?v=20261025"></script>
+<script src="calc.js?v=20261025"></script>
+<script src="shifts.js?v=20261025"></script>
 <script>
 let R = null;
 const t = k => I18N.t(k);
@@ -283,9 +283,9 @@ const today = () => { const d = new Date(); return new Date(d - d.getTimezoneOff
 const fh = h => (Math.round(h * 10) / 10).toLocaleString('ja-JP');
 function renderLists(){
   const del = `<button class="x" data-del aria-label="${esc(t('del'))}">×</button>`;
-  $('jobs').innerHTML = ST.jobs.map((j,i) => `<div class="row" data-k="jobs" data-i="${i}"><input type="text" data-f="name" value="${esc(j.name)}" placeholder="${esc(t('jobPh'))}" aria-label="${esc(t('jobPh'))}"><input type="number" data-f="wage" value="${esc(j.wage)}" min="0" inputmode="numeric" aria-label="wage"><span class="u">${t('uYen')}</span>${del}</div>`).join('');
+  $('jobs').innerHTML = ST.jobs.map((j,i) => `<div class="row" data-k="jobs" data-i="${i}"><input type="text" data-f="name" value="${esc(j.name)}" placeholder="${esc(t('jobPh'))}" aria-label="${esc(t('jobPh'))}"><input type="number" data-f="wage" value="${esc(j.wage)}" min="0" step="1" inputmode="numeric" aria-label="wage"><span class="u">${t('uYen')}</span>${del}</div>`).join('');
   const opts = sel => ST.jobs.map(j => `<option value="${j.id}"${j.id === sel ? ' selected' : ''}>${esc(j.name || '—')}</option>`).join('');
-  $('shifts').innerHTML = ST.shifts.map((s,i) => `<div class="row" data-k="shifts" data-i="${i}"><input type="date" data-f="date" value="${esc(s.date)}"><input type="time" data-f="start" value="${esc(s.start)}"><input type="time" data-f="end" value="${esc(s.end)}"><input type="number" data-f="hours" value="${esc(s.hours)}" min="0" step="0.25" placeholder="h" inputmode="decimal" aria-label="h"><select data-f="job">${opts(s.job)}</select>${del}</div>`).join('');
+  $('shifts').innerHTML = ST.shifts.map((s,i) => `<div class="row" data-k="shifts" data-i="${i}"><input type="date" data-f="date" value="${esc(s.date)}"><input type="time" data-f="start" value="${esc(s.start)}"><input type="time" data-f="end" value="${esc(s.end)}"><input type="number" data-f="hours" value="${esc(s.hours)}" min="0" max="24" step="0.25" placeholder="h" inputmode="decimal" aria-label="h"><select data-f="job">${opts(s.job)}</select>${del}</div>`).join('');
   if ($('vacs')) $('vacs').innerHTML = ST.vac.map((v,i) => `<div class="row" data-k="vac" data-i="${i}"><input type="date" data-f="from" value="${esc(v.from)}"><span class="u">–</span><input type="date" data-f="to" value="${esc(v.to)}">${del}</div>`).join('');
 }
 document.addEventListener('input', e => { const r = e.target.closest('[data-k]'); if (!r || !e.target.dataset.f) return;
