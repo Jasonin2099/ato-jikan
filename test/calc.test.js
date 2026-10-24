@@ -90,3 +90,11 @@ test('planned shift income from all jobs is added to what was paid', () => {
   assert.ok(!r.status.find(x => x.id === 'shaho').over);
   assert.ok(!C.compute(R, { ...base, ytd: 1450000 }).status.some(x => x.planOver));
 });
+
+test('projection ignores negative or non-numeric weekly hours', () => {
+  const C = require('../calc.js'), R = require('../rules/2026.json');
+  for (const wh of [-5, 'abc', '']) {
+    const r = C.compute(R, { wage: 1200, ytd: 500000, weekHours: wh, weeksLeft: 10 });
+    assert.strictEqual(r.proj, 500000, String(wh));
+  }
+});

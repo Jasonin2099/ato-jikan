@@ -45,7 +45,9 @@
     const hours = legalH === null ? moneyH : Math.min(moneyH, legalH);
     // income from planned shifts (all employers) not paid yet
     const plan = Math.max(0, +i.planned || 0);
-    const proj = i.weekHours != null && wage > 0 ? ytd + wage * i.weekHours * wl : null;
+    // a typo like "-5" or "abc" must not pull the projection below what is already earned
+    const wh = Math.max(0, +i.weekHours || 0);
+    const proj = i.weekHours != null && wage > 0 ? ytd + wage * wh * wl : null;
     return {
       hours, moneyH, legalH, room, target, walls: W, proj, planned: plan,
       bindLegal: legalH !== null && legalH < moneyH,
