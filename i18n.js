@@ -83,6 +83,13 @@
       cF1: '按令和8年（2026年）规则计算（国税厅・日本年金机构・出入国在留管理厅）', cF2: '仅供参考，具体请向打工单位、保险方或税务署确认'
     },
     en: {
+      secShift: 'Shifts & jobs', jobsL: 'Employers<span class="h">Add every job you have; each has its own wage</span>', jobPh: 'Name', shiftsL: 'Shifts<span class="h">Date, start and end (past midnight is fine). No times? Enter hours</span>',
+      addJob: '+ Job', addShift: '+ Shift', addVac: '+ Vacation', del: 'Delete', jobSum: (h, y, f) => `Shifts: ${h} h · ${y} (planned from tomorrow: ${f})`, stPlan: 'Over with planned shifts',
+      secRoll: 'Student visa: any 7 days in a row', vacL: 'Long vacations<span class="h">Dates set by your school (first and last day included)</span>',
+      rollNone: 'Add shifts to check that every run of 7 days stays within 28 h', rollOk: (m, L) => `Every 7-day run is within the limit (max ${m} / ${L} h)`,
+      rollOver: (n, m, L, f) => `${n} runs of 7 days go over. Worst: ${m} h from ${f} (limit ${L})`, rollDay: n => `${n} vacation day(s) over 8 h`,
+      rollOverlap: n => `${n} overlapping shift(s) (the overlap is counted once)`, rollRoom: (d, h) => `On ${d} you can still add ${h} h`,
+      rollNote: 'Counted over any 7 days in a row, not calendar weeks. A 7-day run that crosses a vacation start or end is checked against 28 h to be safe.',
       mkBusy: 'Making…', loading: 'Loading…', tShared: 'Shared', cWalls: 'This year\'s walls', cSrc: 'Sources: NTA, Japan Pension Service, Immigration Services Agency (2026)', statW: 'h / week', statM: 'h / month', statY: 'left to earn', barL: m => `${m} paid`, tMade: 'Image ready', tSaved: 'Image saved', hsFull: 'You have hit the line. Rest up, you earned it.',
       introH: 'How many more hours can you work this year?', introP: 'Enter your hourly wage and what you have earned so far. We work back from Japan\'s income walls (1.5M yen and more) and the 28-hour weekly limit for international students.', miniK: 'Left this year', htmlLang: 'en', title: 'ato-jikan — how many more hours can a student work in Japan (2026)', brand: 'ato-jikan', sub: '2026 rules',
       hkDefault: 'Staying a dependent, this year you can still work', hUnit: 'hours',
