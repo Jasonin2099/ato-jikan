@@ -73,5 +73,20 @@
     return out;
   };
 
+  // ---- how much more can go on one date ----
+  // The smallest room over the 7 windows that contain the date, and the 8 h/day cap on vacation days.
+  api.roomOn = (R, shifts, periods, date) => {
+    const d = api.dayNum(date); if (isNaN(d)) return null;
+    const { hours } = api.dayHours(shifts), h = x => hours[x] || 0;
+    let room = Infinity;
+    for (let s = d - 6; s <= d; s++) {
+      let sum = 0, allVac = true;
+      for (let x = s; x < s + 7; x++) { sum += h(x); if (!api.isVac(periods, x)) allVac = false; }
+      room = Math.min(room, (allVac ? R.intlVacWeek.value : R.intlWeek.value) - sum);
+    }
+    if (api.isVac(periods, d)) room = Math.min(room, R.intlVacDay.value - h(d));
+    return Math.max(0, room);
+  };
+
   return api;
 });
