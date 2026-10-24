@@ -51,5 +51,27 @@
   // periods: [{from:'YYYY-MM-DD', to:'YYYY-MM-DD'}], both ends inclusive, as set by the school's 学則.
   api.isVac = (periods, d) => (periods || []).some(p => { const a = api.dayNum(p.from), b = api.dayNum(p.to); return !isNaN(a) && !isNaN(b) && d >= a && d <= b; });
 
+  // ---- rolling 7-day check ----
+  // 資格外活動許可 (留学): 1週28時間以内 counted over ANY 7 consecutive days, not calendar weeks.
+  // 長期休業期間: 1日8時間以内. A window counts as "vacation" (40 h = 8 h × 5 days) only when all 7 days are inside
+  // a vacation period; a window that straddles the start or end uses 28 h. This is the conservative reading.
+  api.check = (R, shifts, periods) => {
+    const wk = R.intlWeek.value, vwk = R.intlVacWeek.value, vday = R.intlVacDay.value;
+    const { hours, overlaps } = api.dayHours(shifts), days = Object.keys(hours).map(Number).sort((a, b) => a - b);
+    const out = { max: 0, maxFrom: null, maxLimit: wk, windows: [], over: [], dayOver: [], overlaps, hours };
+    if (!days.length) return out;
+    const h = d => hours[d] || 0;
+    for (let s = days[0] - 6; s <= days[days.length - 1]; s++) {
+      let sum = 0, allVac = true;
+      for (let d = s; d < s + 7; d++) { sum += h(d); if (!api.isVac(periods, d)) allVac = false; }
+      const limit = allVac ? vwk : wk, w = { from: api.dayStr(s), to: api.dayStr(s + 6), hours: sum, limit, vac: allVac };
+      out.windows.push(w);
+      if (sum - limit > out.max - out.maxLimit || out.maxFrom === null) { out.max = sum; out.maxLimit = limit; out.maxFrom = w.from; }
+      if (sum > limit + 1e-9) out.over.push(w);
+    }
+    for (const d of days) if (api.isVac(periods, d) && h(d) > vday + 1e-9) out.dayOver.push({ date: api.dayStr(d), hours: h(d), limit: vday });
+    return out;
+  };
+
   return api;
 });
