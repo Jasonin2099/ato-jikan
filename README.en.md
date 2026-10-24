@@ -17,6 +17,14 @@ A tool for students with part-time jobs in Japan: it works out **how many more h
 - Everything runs on your device. Nothing is sent anywhere.
 - Works offline once opened, and can be added to the home screen.
 
+### Shifts, several jobs and the 28-hour check (student visa)
+
+- **Any 7 days in a row**: the 28 h/week limit of the 資格外活動許可 is not per calendar week; every run of 7 consecutive days must stay within 28 h. Enter shifts and the tool checks every run, shows the ones that go over and how many hours you can still add today.
+- **Long vacations**: during the long vacation set by your school, the limit is 8 h a day. You enter the dates (first and last day included). A 7-day run counts as vacation (40 h = 8 h × 5) only when all 7 days are inside it; a run that crosses the start or end uses 28 h to be safe.
+- **Several jobs**: each employer has its own wage; hours from all of them are added up, and planned shift income counts toward the income walls.
+- Shifts past midnight are split at 0:00; overlapping shifts count once. Data stays in your browser (localStorage).
+- Source: [Immigration Services Agency, 資格外活動許可](https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00003.html)
+
 ## Rules and sources
 All numbers live in [`rules/2026.json`](rules/2026.json). Each entry cites its official source (National Tax Agency No.1177 / 1410 / 1199 / 1180, the 2026 tax reform, Japan Pension Service, Immigration Services Agency) and its year.
 
