@@ -47,5 +47,9 @@
     return { hours, overlaps };
   };
 
+  // ---- long vacation (長期休業期間) ----
+  // periods: [{from:'YYYY-MM-DD', to:'YYYY-MM-DD'}], both ends inclusive, as set by the school's 学則.
+  api.isVac = (periods, d) => (periods || []).some(p => { const a = api.dayNum(p.from), b = api.dayNum(p.to); return !isNaN(a) && !isNaN(b) && d >= a && d <= b; });
+
   return api;
 });
