@@ -83,3 +83,10 @@ test('student visa caps: 28 h / 7 days, 8 h a day and 40 h a week in long vacati
   assert.strictEqual(R.intlWeek.value, 28); assert.strictEqual(R.intlVacDay.value, 8); assert.strictEqual(R.intlVacWeek.value, 40);
   assert.strictEqual(R.intlVacWeek.value, R.intlVacDay.value * 5);
 });
+test('planned shift income from all jobs is added to what was paid', () => {
+  const r = C.compute(R, { ...base, ytd: 1450000, planned: 60000 });
+  assert.strictEqual(r.planned, 60000);
+  assert.ok(r.status.find(x => x.id === 'shaho').planOver);
+  assert.ok(!r.status.find(x => x.id === 'shaho').over);
+  assert.ok(!C.compute(R, { ...base, ytd: 1450000 }).status.some(x => x.planOver));
+});
