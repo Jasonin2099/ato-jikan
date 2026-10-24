@@ -316,7 +316,8 @@ function calc(){
   const wk = $('wk').value === '' ? null : +$('wk').value, intl = $('intl').checked;
   $('intlbox').classList.toggle('hide', !intl);
   const wl = AtoJikan.weeksLeft();
-  const r = AtoJikan.compute(R, {wage: $('wage').value, ytd: $('ytd').value, pays: $('pays').value, young, intl, termWeeks: $('tw').value, vacWeeks: $('vw').value, weekHours: wk, weeksLeft: wl});
+  const by = AtoShifts.byJob(ST.jobs, ST.shifts, today());
+  const r = AtoJikan.compute(R, {planned: by.future, wage: $('wage').value, ytd: $('ytd').value, pays: $('pays').value, young, intl, termWeeks: $('tw').value, vacWeeks: $('vw').value, weekHours: wk, weeksLeft: wl});
   const ytd = +$('ytd').value || 0, wage = +$('wage').value || 0, T = label(r.target);
   countTo($('hn'), r.hours);
   $('hk').textContent = r.bindLegal ? t('hkLegal') : t('hkMoney')(T.label);
@@ -329,8 +330,8 @@ function calc(){
   $('hs').textContent = r.room <= 0 ? t('hsFull') : '';
   $('hb').textContent = r.bindLegal ? t('hbLegal')(r.moneyH) : (r.legalH!==null ? t('hbMoney')(r.legalH) : t('hbTarget')(T.label, T.d.replace(/\s*[（(].*/,'')));
   $('walls').innerHTML = r.walls.map((w,i) => {
-    const L = label(w), s = r.status[i], bad = s.over || s.projOver;
-    const st = s.over ? t('stOver') : s.projOver ? t('stProj') : t('stLeft')(man(Math.max(0, w.at - ytd)));
+    const L = label(w), s = r.status[i], bad = s.over || s.projOver || s.planOver;
+    const st = s.over ? t('stOver') : s.projOver ? t('stProj') : s.planOver ? t('stPlan') : t('stLeft')(man(Math.max(0, w.at - ytd)));
     return `<div class="row"><span class="dot ${bad?'over':'ok'}"></span><div class="wl"><div class="wt"><span class="amt">${L.label}</span><span class="st${bad?' bad':''}">${st}</span></div><span class="d">${L.d} <a class="src" href="${w.url}" target="_blank" rel="noopener">${t('src')}<svg class="ic" aria-hidden="true"><use href="#i-external-link"/></svg></a></span></div></div>`;
   }).join('') + (r.proj !== null ? `<div class="row"><span class="proj">${t('proj')(wk, man(r.proj), man(AtoJikan.parentDed(R,ytd,young)), man(AtoJikan.parentDed(R,r.proj,young)))}</span></div>` : '');
   $('mn').textContent = r.hours.toLocaleString('ja-JP'); $('mk2').textContent = t('miniK');
