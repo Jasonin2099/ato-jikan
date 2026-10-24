@@ -1,7 +1,7 @@
 // あと何時間 — offline support. Network first, so a deploy shows up on the next load;
 // the cache is only the fallback when there is no connection.
-const CACHE = 'atojikan-v2';
-const CORE = ['./', 'index.html', 'i18n.js', 'calc.js', 'shifts.js', 'rules/2026.json', 'manifest.webmanifest', 'icon.png',
+const CACHE = 'atojikan-v3';
+const CORE = ['./', 'index.html', 'i18n.js', 'calc.js', 'shifts.js', 'rules/2026.json', 'manifest.webmanifest', 'icon.png', 'icon-192.png',
   'fonts/NotoSansJP-Regular.subset.woff2', 'fonts/NotoSansJP-Bold.subset.woff2',
   'fonts/NotoSansSC-Regular.subset.woff2', 'fonts/NotoSansSC-Bold.subset.woff2'];
 
