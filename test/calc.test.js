@@ -79,3 +79,7 @@ test('without weeksLeft, weeks are taken as typed', () => {
   const { weeksLeft, ...noWl } = base;
   assert.strictEqual(C.compute(R, { ...noWl, ytd: 0, intl: true, termWeeks: 30, vacWeeks: 0 }).legalH, 30 * 28);
 });
+test('student visa caps: 28 h / 7 days, 8 h a day and 40 h a week in long vacations', () => {
+  assert.strictEqual(R.intlWeek.value, 28); assert.strictEqual(R.intlVacDay.value, 8); assert.strictEqual(R.intlVacWeek.value, 40);
+  assert.strictEqual(R.intlVacWeek.value, R.intlVacDay.value * 5);
+});
