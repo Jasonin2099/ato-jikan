@@ -30,7 +30,7 @@
     return w.sort((a, b) => a.at - b.at);
   }
 
-  // in: {wage, ytd, pays, young, intl, termWeeks, vacWeeks, weekHours, weeksLeft}
+  // in: {wage, ytd, pays, young, intl, termWeeks, vacWeeks, weekHours, weeksLeft, planned}
   function compute(R, i) {
     const wage = Math.max(0, +i.wage || 0), ytd = Math.max(0, +i.ytd || 0), pays = Math.max(1, +i.pays || 1);
     const W = walls(R, !!i.young);
@@ -43,13 +43,15 @@
     const vacW = Math.min(cap, Math.max(0, +i.vacWeeks || 0)), termW = Math.min(cap - vacW, Math.max(0, +i.termWeeks || 0));
     const legalH = i.intl ? termW * R.intlWeek.value + vacW * R.intlVacWeek.value : null;
     const hours = legalH === null ? moneyH : Math.min(moneyH, legalH);
+    // income from planned shifts (all employers) not paid yet
+    const plan = Math.max(0, +i.planned || 0);
     const proj = i.weekHours != null && wage > 0 ? ytd + wage * i.weekHours * wl : null;
     return {
-      hours, moneyH, legalH, room, target, walls: W, proj,
+      hours, moneyH, legalH, room, target, walls: W, proj, planned: plan,
       bindLegal: legalH !== null && legalH < moneyH,
       roomUsed: Math.min(room, hours * wage),
       perM: Math.floor(hours / pays), perW: wl > 0 ? hours / wl : 0,
-      status: W.map(w => ({ id: w.id, over: ytd > w.at, projOver: proj !== null && proj > w.at }))
+      status: W.map(w => ({ id: w.id, over: ytd > w.at, projOver: proj !== null && proj > w.at, planOver: plan > 0 && ytd + plan > w.at }))
     };
   }
 
