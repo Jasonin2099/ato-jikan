@@ -62,3 +62,11 @@ test('a window straddling the vacation start uses 28 h (conservative)', () => {
 test('vacation end date is inclusive; the next day is term time again', () => {
   assert.ok(S.isVac(VAC, S.dayNum('2027-03-31'))); assert.ok(!S.isVac(VAC, S.dayNum('2027-04-01')));
 });
+
+test('room on a date is the tightest of its 7 windows', () => {
+  const s = [sh('2026-11-02', '09:00', '17:00'), sh('2026-11-05', '09:00', '19:00')];
+  assert.strictEqual(S.roomOn(R, s, [], '2026-11-07'), 10);
+  assert.strictEqual(S.roomOn(R, s, [], '2026-11-11'), 18);
+  assert.strictEqual(S.roomOn(R, s, [], '2026-11-20'), 28);
+  assert.strictEqual(S.roomOn(R, [sh('2027-02-15', '09:00', '14:00')], VAC, '2027-02-15'), 3);
+});
