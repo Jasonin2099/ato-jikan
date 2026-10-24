@@ -26,5 +26,26 @@
   }
   api.splitDays = splitDays;
 
+  // ---- all shifts -> hours per day ----
+  // Overlapping intervals (two jobs booked at the same time, or a typo) are counted once: you cannot work
+  // two hours in one hour. They are reported in `overlaps` so the user can fix the entry.
+  api.dayHours = shifts => {
+    const iv = [], min = {}, overlaps = [];
+    (shifts || []).forEach((sh, i) => {
+      const v = api.interval(sh);
+      if (v) iv.push([v[0], v[1], i]);
+      else { const d = api.dayNum(sh.date), h = +sh.hours; if (!isNaN(d) && h > 0) min[d] = (min[d] || 0) + Math.round(h * 60); }
+    });
+    iv.sort((p, q) => p[0] - q[0]);
+    let cur = null;
+    for (const [a, b, i] of iv) {
+      if (cur && a < cur[1]) { overlaps.push([cur[2], i]); if (b > cur[1]) { cur[1] = b; cur[2] = i; } }
+      else { if (cur) splitDays(cur[0], cur[1], min); cur = [a, b, i]; }
+    }
+    if (cur) splitDays(cur[0], cur[1], min);
+    const hours = {}; for (const d in min) hours[d] = min[d] / 60;
+    return { hours, overlaps };
+  };
+
   return api;
 });
