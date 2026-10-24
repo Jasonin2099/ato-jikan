@@ -15,3 +15,13 @@ test('hours-only shifts and bad input', () => {
   const { hours } = S.dayHours([{ date: '2026-11-02', hours: 4.5 }, { date: 'x', hours: 3 }, sh('2026-11-02', '10:00', '10:00')]);
   assert.deepStrictEqual(hours, { [S.dayNum('2026-11-02')]: 4.5 });
 });
+
+test('overlapping shifts (two jobs at once) are counted once and reported', () => {
+  const r = S.dayHours([sh('2026-11-02', '10:00', '15:00', 'a'), sh('2026-11-02', '14:00', '18:00', 'b'), sh('2026-11-02', '11:00', '12:00', 'b')]);
+  assert.strictEqual(r.hours[S.dayNum('2026-11-02')], 8);
+  assert.strictEqual(r.overlaps.length, 2);
+});
+test('back-to-back shifts are not an overlap', () => {
+  const r = S.dayHours([sh('2026-11-02', '10:00', '14:00'), sh('2026-11-02', '14:00', '18:00', 'b')]);
+  assert.strictEqual(r.overlaps.length, 0); assert.strictEqual(r.hours[S.dayNum('2026-11-02')], 8);
+});
