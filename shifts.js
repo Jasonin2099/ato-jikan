@@ -88,5 +88,21 @@
     return Math.max(0, room);
   };
 
+  // ---- several employers ----
+  // jobs: [{id, name, wage}]. Hours of each shift (overlaps not removed: each employer pays its own shift)
+  // times that job's wage. `future` only counts shifts dated after `today` (planned, not paid yet).
+  api.shiftHours = sh => { const v = api.interval(sh); return v ? (v[1] - v[0]) / 60 : Math.max(0, +sh.hours || 0); };
+  api.byJob = (jobs, shifts, today) => {
+    const t = api.dayNum(today), rows = (jobs || []).map(j => ({ id: j.id, name: j.name, wage: Math.max(0, +j.wage || 0), hours: 0, income: 0, future: 0 }));
+    const find = id => rows.find(r => r.id === id) || rows[0];
+    for (const sh of shifts || []) {
+      const r = find(sh.job); if (!r) continue;
+      const hh = api.shiftHours(sh), y = hh * r.wage;
+      r.hours += hh; r.income += y; if (!isNaN(t) && api.dayNum(sh.date) > t) r.future += y;
+    }
+    const sum = k => rows.reduce((a, r) => a + r[k], 0);
+    return { rows, hours: sum('hours'), income: sum('income'), future: sum('future') };
+  };
+
   return api;
 });
