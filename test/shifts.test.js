@@ -80,3 +80,16 @@ test('income is summed per employer, planned shifts counted separately', () => {
 test('a shift with an unknown job falls back to the first job', () => {
   assert.strictEqual(S.byJob([{ id: 'a', wage: 1000 }], [{ date: '2026-10-01', hours: 3, job: 'zzz' }], '2026-10-24').income, 3000);
 });
+
+test('times: 24:00 is end of day, 24:30 and 25:00 are invalid', () => {
+  const S = require('../shifts.js');
+  assert.strictEqual(S.mins('24:00'), 1440);
+  assert.ok(isNaN(S.mins('24:30')));
+  assert.ok(isNaN(S.mins('25:00')));
+});
+test('a night shift on 12/31 puts the hours after midnight on 1/1', () => {
+  const S = require('../shifts.js');
+  const h = S.dayHours([{ date: '2026-12-31', start: '22:00', end: '03:00' }]).hours;
+  assert.strictEqual(h[S.dayNum('2026-12-31')], 2);
+  assert.strictEqual(h[S.dayNum('2027-01-01')], 3);
+});

@@ -11,7 +11,7 @@
   const DAY = 1440;
   api.dayNum = s => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) / 864e5 : NaN; };
   api.dayStr = n => new Date(n * 864e5).toISOString().slice(0, 10);
-  api.mins = s => { const m = /^(\d{1,2}):(\d{2})$/.exec(s || ''); return m && +m[1] <= 24 && +m[2] < 60 ? +m[1] * 60 + +m[2] : NaN; };
+  api.mins = s => { const m = /^(\d{1,2}):(\d{2})$/.exec(s || ''); return m && +m[2] < 60 && (+m[1] < 24 || (+m[1] === 24 && +m[2] === 0)) ? +m[1] * 60 + +m[2] : NaN; };
 
   // ---- one shift -> minutes per calendar day ----
   // With start/end the shift is a time interval; end <= start means it runs past midnight and the part
