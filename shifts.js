@@ -13,5 +13,18 @@
   api.dayStr = n => new Date(n * 864e5).toISOString().slice(0, 10);
   api.mins = s => { const m = /^(\d{1,2}):(\d{2})$/.exec(s || ''); return m && +m[1] <= 24 && +m[2] < 60 ? +m[1] * 60 + +m[2] : NaN; };
 
+  // ---- one shift -> minutes per calendar day ----
+  // With start/end the shift is a time interval; end <= start means it runs past midnight and the part
+  // after 0:00 counts for the next day. Without times, `hours` is booked on the shift's own date.
+  api.interval = sh => {
+    const d = api.dayNum(sh.date), a = api.mins(sh.start), b = api.mins(sh.end);
+    if (isNaN(d) || isNaN(a) || isNaN(b) || a === b) return null;
+    return [d * DAY + a, d * DAY + b + (b < a ? DAY : 0)];
+  };
+  function splitDays(lo, hi, out) {
+    for (let x = lo; x < hi;) { const d = Math.floor(x / DAY), end = Math.min(hi, (d + 1) * DAY); out[d] = (out[d] || 0) + (end - x); x = end; }
+  }
+  api.splitDays = splitDays;
+
   return api;
 });
