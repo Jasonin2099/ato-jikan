@@ -1,7 +1,9 @@
 # Changelog
 
-## Unreleased
+## 0.3.1 — 2026-10-27
 
+- **Fix: the ＋ job / shift / vacation buttons were invisible** (they shared a class with the hidden scroll summary), so shifts could not be entered at all in 0.3.0.
+- Shifts: save a backup file and restore it on another device (JSON, nothing leaves the browser otherwise).
 - Shifts: times like `24:30` are rejected (only `24:00` = end of day).
 - Projection: a negative or non-numeric weekly-hours value no longer lowers the year-end estimate.
 - Offline: the 192px app icon is cached too (service worker cache v3).
