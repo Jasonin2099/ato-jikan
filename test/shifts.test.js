@@ -93,3 +93,17 @@ test('a night shift on 12/31 puts the hours after midnight on 1/1', () => {
   assert.strictEqual(h[S.dayNum('2026-12-31')], 2);
   assert.strictEqual(h[S.dayNum('2027-01-01')], 3);
 });
+
+test('backup round-trips and restore() drops junk', () => {
+  const st = { jobs: [{ id: 'a', name: 'コンビニ', wage: '1200' }], shifts: [{ date: '2026-10-27', start: '10:00', end: '15:00', hours: '', job: 'a' }], vac: [{ from: '2026-12-20', to: '2027-01-07' }] };
+  const b = JSON.parse(JSON.stringify(S.backup(st)));
+  assert.deepStrictEqual(S.restore(b), st);
+  const messy = { ...b, jobs: [...b.jobs, null, { name: 'no id' }], shifts: [...b.shifts, { date: 'bad' }, { date: '2026-10-28', hours: 3, job: 'gone', evil: '<x>' }], vac: [{ from: 'x', to: 'y' }] };
+  const r = S.restore(messy);
+  assert.strictEqual(r.jobs.length, 1); assert.strictEqual(r.vac.length, 0);
+  assert.deepStrictEqual(r.shifts[1], { date: '2026-10-28', start: '', end: '', hours: '3', job: 'a' });
+});
+test('restore() refuses files that are not a backup', () => {
+  for (const o of [null, {}, { app: 'other', v: 1, jobs: [], shifts: [], vac: [] }, { app: 'ato-jikan', v: 2, jobs: [], shifts: [], vac: [] }, { app: 'ato-jikan', v: 1, jobs: {}, shifts: [], vac: [] }])
+    assert.throws(() => S.restore(o), /backup/);
+});

@@ -71,6 +71,7 @@ main{max-width:560px;margin:0 auto;padding:var(--s4) var(--s4) 56px}
 .lst .row{flex-wrap:wrap;gap:var(--s2)}.lst label{flex:1 1 200px}
 .lst input,.lst select{font:inherit;font-size:14px;border:0;background:var(--field);border-radius:var(--r-s);padding:7px 8px;color:var(--ink);min-width:0}
 .lst input[type=text]{flex:1 1 120px}.lst input[type=number]{width:84px}.lst input[type=date]{flex:1 1 140px}.lst input[type=time]{width:118px}.lst select{flex:1 1 100px}
+.row.bk{justify-content:flex-start;gap:8px;flex-wrap:wrap}
 .addbtn{border:0;background:var(--accent-tint);color:var(--accent-ink);font:inherit;font-size:13px;font-weight:600;padding:6px 12px;border-radius:99px;cursor:pointer;white-space:nowrap}
 .x{border:0;background:none;color:var(--ink-3);font-size:20px;line-height:1;padding:6px 8px;cursor:pointer}
 .roll{display:block;flex:1;font-size:14px;line-height:1.6}.roll .bad,.roll .ok{display:block;font-weight:600}.roll .bad{color:var(--red)}.roll .ok{color:var(--green)}.roll .h{display:block;font-size:12px;color:var(--ink-3)}.roll a{color:var(--ink-3)}
@@ -203,6 +204,7 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
     <div class="row"><label data-i18n="shiftsL">シフト</label><button class="addbtn" id="addShift" data-i18n="addShift">＋ シフト</button></div>
     <div id="shifts"></div>
     <div class="row hide" id="jobsumr"><span class="roll" id="jobsum"></span></div>
+    <div class="row bk"><button class="addbtn" id="bkExport" data-i18n="bkExport">バックアップを保存</button><button class="addbtn" id="bkImport" data-i18n="bkImport">バックアップから戻す</button><input type="file" id="bkFile" accept="application/json,.json" hidden></div>
   </div>
 
   <div id="intlbox" class="hide">
@@ -235,9 +237,9 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
     Icons: <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a> (ISC License)
   </p>
 </main>
-<script src="i18n.js?v=20261025"></script>
+<script src="i18n.js?v=20261027"></script>
 <script src="calc.js?v=20261025"></script>
-<script src="shifts.js?v=20261025"></script>
+<script src="shifts.js?v=20261027"></script>
 <script>
 let R = null;
 const t = k => I18N.t(k);
@@ -404,6 +406,17 @@ $('addVac').onclick = () => { ST.vac.push({from: today(), to: today()}); saveST(
 $('addJob').onclick = () => { ST.jobs.push({id: uid(), name: '', wage: $('wage').value}); saveST(); renderLists(); calc(); };
 $('addShift').onclick = () => { if (!ST.jobs.length) ST.jobs.push({id: uid(), name: '', wage: $('wage').value}); const p = ST.shifts[ST.shifts.length - 1];
   ST.shifts.push({date: today(), start: p ? p.start : '10:00', end: p ? p.end : '15:00', hours: '', job: p ? p.job : ST.jobs[0].id}); saveST(); renderLists(); calc(); };
+// backup: the only copy of the shifts is this browser's localStorage
+$('bkExport').onclick = () => {
+  const f = new File([JSON.stringify(AtoShifts.backup(ST), null, 1)], `atojikan-shifts-${today()}.json`, {type: 'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(f); a.download = f.name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1e4); toast(t('tBkSaved'));
+};
+$('bkImport').onclick = () => $('bkFile').click();
+$('bkFile').onchange = async e => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+  try { ST = AtoShifts.restore(JSON.parse(await f.text())); } catch(err) { toast(t('tBadFile')); return; }
+  saveST(); renderLists(); calc(); toast(t('tImported')(ST.shifts.length));
+};
 let blob = null;
 I18N.apply();
 document.querySelectorAll('#lang button').forEach(b => b.onclick = () => { I18N.set(b.dataset.l); renderLists(); calc(); });

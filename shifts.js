@@ -104,5 +104,20 @@
     return { rows, hours: sum('hours'), income: sum('income'), future: sum('future') };
   };
 
+  // ---- backup file ----
+  // Shifts live only in localStorage, so a new phone or a cleared browser loses them. A backup is
+  // plain JSON; restore() keeps only the fields the app knows and refuses anything else.
+  api.backup = st => ({ app: 'ato-jikan', v: 1, jobs: st.jobs || [], shifts: st.shifts || [], vac: st.vac || [] });
+  api.restore = o => {
+    if (!o || o.app !== 'ato-jikan' || o.v !== 1 || ![o.jobs, o.shifts, o.vac].every(Array.isArray)) throw new Error('not an ato-jikan backup');
+    const str = x => (x == null ? '' : String(x).slice(0, 100));
+    const jobs = o.jobs.filter(j => j && j.id).map(j => ({ id: str(j.id), name: str(j.name), wage: str(j.wage) }));
+    const ids = new Set(jobs.map(j => j.id));
+    const shifts = o.shifts.filter(sh => sh && !isNaN(api.dayNum(sh.date)))
+      .map(sh => ({ date: sh.date, start: str(sh.start), end: str(sh.end), hours: str(sh.hours), job: ids.has(sh.job) ? sh.job : (jobs[0] || {}).id || '' }));
+    const vac = o.vac.filter(p => p && !isNaN(api.dayNum(p.from)) && !isNaN(api.dayNum(p.to))).map(p => ({ from: p.from, to: p.to }));
+    return { jobs, shifts, vac };
+  };
+
   return api;
 });

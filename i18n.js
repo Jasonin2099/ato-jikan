@@ -4,7 +4,7 @@
   const S = {
     ja: {
       secShift: 'シフト・バイト先', jobsL: 'バイト先<span class="h">掛け持ちなら全部。時給は先ごと</span>', jobPh: '名前', shiftsL: 'シフト<span class="h">日付と開始・終了（日をまたいでもOK）。時刻がなければ時間数</span>',
-      addJob: '＋ バイト先', addShift: '＋ シフト', addVac: '＋ 休業期間', del: '削除', jobSum: (h, y, f) => `シフト合計 ${h} 時間 ・ ${y}（うち今後の予定 ${f}）`, stPlan: '予定シフトで超える',
+      addJob: '＋ バイト先', addShift: '＋ シフト', addVac: '＋ 休業期間', del: '削除', bkExport: 'バックアップを保存', bkImport: 'バックアップから戻す', tBkSaved: 'バックアップを保存しました', tImported: n => `シフト ${n} 件を読み込みました`, tBadFile: 'このファイルは読み込めません', jobSum: (h, y, f) => `シフト合計 ${h} 時間 ・ ${y}（うち今後の予定 ${f}）`, stPlan: '予定シフトで超える',
       secRoll: '留学生：連続する7日間のチェック', vacL: '長期休業期間<span class="h">学則・学年暦で決まる期間（初日・最終日を含む）</span>',
       rollNone: 'シフトを入れると、どの連続7日間でも28時間以内かを確認します', rollOk: (m, L) => `どの7日間も上限内です（最大 ${m} / ${L} 時間）`,
       rollOver: (n, m, L, f) => `上限を超える7日間が ${n} 個あります。最大は ${f} からの ${m} 時間（上限 ${L}）`, rollDay: n => `休業中に1日8時間を超える日が ${n} 日あります`,
@@ -44,7 +44,7 @@
     },
     zh: {
       secShift: '排班・打工单位', jobsL: '打工单位<span class="h">打几份工就全部填上，时薪各算各的</span>', jobPh: '名称', shiftsL: '排班<span class="h">日期和上下班时间（跨午夜也可以）。没有时间就填小时数</span>',
-      addJob: '＋ 打工单位', addShift: '＋ 排班', addVac: '＋ 长假', del: '删除', jobSum: (h, y, f) => `排班合计 ${h} 小时 ・ ${y}（其中今后的排班 ${f}）`, stPlan: '加上排班会超',
+      addJob: '＋ 打工单位', addShift: '＋ 排班', addVac: '＋ 长假', del: '删除', bkExport: '保存备份', bkImport: '从备份恢复', tBkSaved: '备份已保存', tImported: n => `已导入 ${n} 条排班`, tBadFile: '无法读取这个文件', jobSum: (h, y, f) => `排班合计 ${h} 小时 ・ ${y}（其中今后的排班 ${f}）`, stPlan: '加上排班会超',
       secRoll: '留学生：任意连续7天检查', vacL: '长假期间<span class="h">按学校学则・校历填写（含首尾两天）</span>',
       rollNone: '填上排班后，会检查任意连续7天是否都在28小时以内', rollOk: (m, L) => `所有连续7天都没超（最多 ${m} / ${L} 小时）`,
       rollOver: (n, m, L, f) => `有 ${n} 个连续7天超了上限。最多的是 ${f} 起的 ${m} 小时（上限 ${L}）`, rollDay: n => `长假中有 ${n} 天超过每天8小时`,
@@ -84,7 +84,7 @@
     },
     en: {
       secShift: 'Shifts & jobs', jobsL: 'Employers<span class="h">Add every job you have; each has its own wage</span>', jobPh: 'Name', shiftsL: 'Shifts<span class="h">Date, start and end (past midnight is fine). No times? Enter hours</span>',
-      addJob: '+ Job', addShift: '+ Shift', addVac: '+ Vacation', del: 'Delete', jobSum: (h, y, f) => `Shifts: ${h} h · ${y} (planned from tomorrow: ${f})`, stPlan: 'Over with planned shifts',
+      addJob: '+ Job', addShift: '+ Shift', addVac: '+ Vacation', del: 'Delete', bkExport: 'Save backup', bkImport: 'Restore backup', tBkSaved: 'Backup saved', tImported: n => `Restored ${n} shifts`, tBadFile: "Can't read this file", jobSum: (h, y, f) => `Shifts: ${h} h · ${y} (planned from tomorrow: ${f})`, stPlan: 'Over with planned shifts',
       secRoll: 'Student visa: any 7 days in a row', vacL: 'Long vacations<span class="h">Dates set by your school (first and last day included)</span>',
       rollNone: 'Add shifts to check that every run of 7 days stays within 28 h', rollOk: (m, L) => `Every 7-day run is within the limit (max ${m} / ${L} h)`,
       rollOver: (n, m, L, f) => `${n} runs of 7 days go over. Worst: ${m} h from ${f} (limit ${L})`, rollDay: n => `${n} vacation day(s) over 8 h`,
