@@ -1,0 +1,25 @@
+name: test
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 20, 22, 24]
+        # shift maths runs on UTC day numbers; prove it in a zone far from Japan too
+        tz: [Asia/Tokyo]
+        include:
+          - node: 24
+            tz: America/Los_Angeles
+    env:
+      TZ: ${{ matrix.tz }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm test
