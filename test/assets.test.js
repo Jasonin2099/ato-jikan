@@ -13,3 +13,11 @@ test('manifest icons exist and are precached for offline install', () => {
     assert.ok(core.includes(i.src), i.src + ' not in sw.js CORE');
   }
 });
+test('add buttons do not share a class with the fixed summary bar', () => {
+  // .mini is the hidden-until-scrolled summary bar; reusing it made ＋ buttons invisible (0.3.0)
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  for (const id of ['addJob', 'addShift', 'addVac']) {
+    const m = new RegExp(`<button class="([^"]*)" id="${id}"`).exec(html);
+    assert.ok(m, id); assert.ok(!m[1].split(' ').includes('mini'), id);
+  }
+});
