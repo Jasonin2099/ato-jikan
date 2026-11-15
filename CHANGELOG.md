@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- When the calendar year is past the rule table's year (e.g. January 2027 with the 2026 table), a notice says the numbers use last year's rules (ja/zh/en).
+- Fonts: the subset fonts were missing about 60 characters added with shifts and backups (e.g. 掛け持ち, 削除), so those showed in a fallback font. Rebuilt, and a test now fails when UI text uses a character the subset lacks.
+
 ## 0.3.1 — 2026-10-27
 
 - **Fix: the ＋ job / shift / vacation buttons were invisible** (they shared a class with the hidden scroll summary), so shifts could not be entered at all in 0.3.0.

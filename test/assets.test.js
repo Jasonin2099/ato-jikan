@@ -21,3 +21,11 @@ test('add buttons do not share a class with the fixed summary bar', () => {
     assert.ok(m, id); assert.ok(!m[1].split(' ').includes('mini'), id);
   }
 });
+
+test('font subsets cover every character in the UI text (run tools/subset-fonts.py after changing text)', () => {
+  const fs = require('fs'), root = __dirname + '/../';
+  const have = new Set(fs.readFileSync(root + 'fonts/chars.txt', 'utf8'));
+  const text = fs.readFileSync(root + 'index.html', 'utf8') + fs.readFileSync(root + 'i18n.js', 'utf8');
+  const missing = [...new Set(text)].filter(c => c.codePointAt(0) > 0x7e && !have.has(c));
+  assert.deepStrictEqual(missing, []);
+});
