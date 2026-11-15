@@ -143,6 +143,7 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
 .top{height:calc(env(safe-area-inset-top,0px) + 60px)}
 .top .lang{margin-left:auto;padding:2px}.top .lang button{min-width:44px;min-height:40px;padding:0 12px;font-size:13px;border-radius:8px}
 .mini{top:calc(env(safe-area-inset-top,0px) + 60px)}
+.stale{font-size:12px;line-height:1.6;color:var(--ink-2);background:var(--field);border-radius:8px;padding:6px 10px;margin:0 0 var(--s4)}
 .chip{display:inline-block;font-size:12px;font-weight:600;color:var(--ink-2);background:var(--field);border-radius:99px;padding:3px 10px;margin-bottom:var(--s4)}
 .hero{padding:var(--s5) var(--s5) 28px}
 .hero .n{font-size:104px;line-height:1;margin:var(--s3) 0 28px;letter-spacing:-.045em}
@@ -162,6 +163,7 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
   <aside class="res">
   <div class="hero" id="hero">
     <span class="chip" data-i18n="sub">2026年分（令和8年）</span>
+    <p class="stale" id="stale" role="status" hidden></p>
     <div class="k" id="hk" data-i18n="hkDefault">今年、扶養を外れずに働けるのは</div>
     <div class="n"><span id="hn">–</span><small data-i18n="hUnit">時間</small></div>
     <div class="stats"><div><b id="sW">–</b><span data-i18n="statW">時間 / 週</span></div><div><b id="sM">–</b><span data-i18n="statM">時間 / 月</span></div><div><b id="sY">–</b><span data-i18n="statY">あと稼げる</span></div></div>
@@ -237,7 +239,7 @@ main{display:flex;flex-direction:column;max-width:calc(var(--maxw) + 2*var(--pad
     Icons: <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a> (ISC License)
   </p>
 </main>
-<script src="i18n.js?v=20261027"></script>
+<script src="i18n.js?v=20261115"></script>
 <script src="calc.js?v=20261025"></script>
 <script src="shifts.js?v=20261027"></script>
 <script>
@@ -315,6 +317,7 @@ function rollUI(intl){
 }
 function calc(){
   if (!R) return;
+  const ny = new Date().getFullYear(), st = $('stale'); st.hidden = ny === R.year; if (!st.hidden) st.textContent = t('stale')(R.year, ny);
   const wk = $('wk').value === '' ? null : +$('wk').value, intl = $('intl').checked;
   $('intlbox').classList.toggle('hide', !intl);
   const wl = AtoJikan.weeksLeft();
