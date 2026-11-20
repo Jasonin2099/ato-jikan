@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.3.2 — 2026-11-20
+
 - When the calendar year is past the rule table's year (e.g. January 2027 with the 2026 table), a notice says the numbers use last year's rules (ja/zh/en).
 - Fonts: the subset fonts were missing about 60 characters added with shifts and backups (e.g. 掛け持ち, 削除), so those showed in a fallback font. Rebuilt, and a test now fails when UI text uses a character the subset lacks.
 
